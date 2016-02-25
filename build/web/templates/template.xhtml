@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta http-equiv="X-UA-Compatible" conent="IE=edge"></meta>
+        <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <title><ui:insert name="title">SUMS</ui:insert></title>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <ui:insert name="header">
+                <div class="navbar navbar-inverse">
+                      <div class="navbar-brand">
+                    SUMS
+                </div>
+                    
+                </div>
+              
+            </ui:insert>
+            <ui:insert name="content">No content </ui:insert>
+            <ui:insert name="footer">
+                SUMS Web Application for ENTWA
+            </ui:insert>
+            
+            <ui:insert name="scripts"></ui:insert>
+        </div>
+    </h:body>
+</html>
