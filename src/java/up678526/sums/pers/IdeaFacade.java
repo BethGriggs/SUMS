@@ -12,7 +12,7 @@ import up678526.sums.ents.Idea;
 
 /**
  *
- * @author beth
+ * @author up678526
  */
 @Stateless
 public class IdeaFacade extends AbstractFacade<Idea> {

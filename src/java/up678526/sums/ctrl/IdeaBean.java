@@ -49,4 +49,6 @@ public class IdeaBean {
     public IdeaService getService() {
         return this.ideaService;
     }
+    
+    // create Entity from properties 
 }

@@ -21,30 +21,29 @@ public class IdeaService {
     public IdeaService() {
     }
 
+        // more named towards what the business operation 'create', 'createIdea' 
+         // is this okay to do - business logic ... Bank account not overdrawn 
+    // mutiple facades between entities 
     @EJB
-    private IdeaFacade personFacade;
-
-    protected IdeaFacade getFacade() {
-        return this.personFacade;
-    }
+    private IdeaFacade ideaFacade;
 
     public Idea find(Long id) {
-        return getFacade().find(id);
+        return ideaFacade.find(id);
     }
 
     public void create(Idea idea) {
-        getFacade().create(idea);
+        ideaFacade.create(idea);
     }
 
     public List<Idea> findAll() {
-        return getFacade().findAll();
+        return ideaFacade.findAll();
     }
 
     public Idea update(Idea idea) {
-        return getFacade().edit(idea);
+        return ideaFacade.edit(idea);
     }
 
     public void remove(Idea idea) {
-        getFacade().remove(idea);
+        ideaFacade.remove(idea);
     }
 }
