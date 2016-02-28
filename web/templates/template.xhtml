@@ -8,19 +8,56 @@
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
         <meta http-equiv="X-UA-Compatible" conent="IE=edge"></meta>
+        <h:outputScript library="js" name="jquery-2.2.1.min.js"></h:outputScript>
         <h:outputStylesheet library="css" name="bootstrap.min.css"></h:outputStylesheet>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"></link>
+
         <title><ui:insert name="title">SUMS</ui:insert></title>
     </h:head>
     <h:body>
         <div class="container">
             <ui:insert name="header">
-          
+
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">SUMS</a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <form class="navbar-form navbar-left" role="search">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Search for ideas"></input>
+                                            <a><i class="fa fa-search"></i></a>
+                                        </div>
+
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="#"  role="button" aria-haspopup="true" aria-expanded="false">Joe Bloggs</a>
+                                </li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+
             </ui:insert>
             <ui:insert name="content">No content </ui:insert>
             <ui:insert name="footer">
                 SUMS Web Application for ENTWA
             </ui:insert>
-            
+
             <ui:insert name="scripts"></ui:insert>
         </div>
     </h:body>
