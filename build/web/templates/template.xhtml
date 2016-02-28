@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:b="http://butterfaces.larmic.de/components"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <meta charset="utf-8"></meta>
@@ -16,44 +16,24 @@
     </h:head>
     <h:body>
         <div class="container">
-            <ui:insert name="header">
+            <b:navBar brand="SUMS" brandHref="#">
 
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <!-- Brand and toggle get grouped for better mobile display -->
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">SUMS</a>
-                        </div>
+                <form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control"> </input>
+                    </div>
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </form>
+                <b:navbarLinks pull="right">
+                    <b:dropMenu value="Joe Bloggs">
+                        <b:navLink value="My Ideas" href="#"></b:navLink>
+                        <b:navLink></b:navLink>
+                        <b:navLink value="Logout" href="#"></b:navLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
 
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <form class="navbar-form navbar-left" role="search">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search for ideas"></input>
-                                            <a><i class="fa fa-search"></i></a>
-                                        </div>
-
-                                    </form>
-                                </li>
-                                <li>
-                                    <a href="#"  role="button" aria-haspopup="true" aria-expanded="false">Joe Bloggs</a>
-                                </li>
-                            </ul>
-                        </div><!-- /.navbar-collapse -->
-                    </div><!-- /.container-fluid -->
-                </nav>
-
-            </ui:insert>
-            <ui:insert name="content">No content </ui:insert>
+            <ui:insert name="content"> </ui:insert>
             <ui:insert name="footer">
                 SUMS Web Application for ENTWA
             </ui:insert>
