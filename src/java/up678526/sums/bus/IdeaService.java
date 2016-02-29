@@ -31,7 +31,7 @@ public class IdeaService {
         return ideaFacade.find(id);
     }
 
-    public void create(Idea idea) {
+    public void addIdea(Idea idea) {
         ideaFacade.create(idea);
     }
 

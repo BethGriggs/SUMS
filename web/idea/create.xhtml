@@ -12,7 +12,16 @@
             <b:row>
                 <b:column>
                     <h1>Create an Idea</h1>
-
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5"> 
+                            <h:outputText value="Title:"/>
+                            <b:inputText  id="titie" value="#{ideaBean.title}"></b:inputText>
+                            <h:outputText value="Description:"/>
+                            <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
+                        </h:panelGrid>
+                        
+                        <b:commandButton id="createIdea" value="Create Idea" action="#{ideaBean.create()}"/>         
+                    </h:form>
                 </b:column>
             </b:row>
         </b:container>

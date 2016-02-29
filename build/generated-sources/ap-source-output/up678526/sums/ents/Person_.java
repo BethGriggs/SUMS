@@ -5,12 +5,14 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import up678526.sums.ents.Idea;
+import up678526.sums.ents.Organisation;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-02-28T18:55:36")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-02-29T13:39:00")
 @StaticMetamodel(Person.class)
 public class Person_ { 
 
     public static volatile SingularAttribute<Person, String> password;
+    public static volatile SingularAttribute<Person, Organisation> organisation;
     public static volatile ListAttribute<Person, Idea> ideas;
     public static volatile SingularAttribute<Person, Long> id;
     public static volatile SingularAttribute<Person, String> type;

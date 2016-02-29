@@ -64,6 +64,20 @@ public class IdeaBean {
         return allIdeas;
     }
     
+    /**
+     * Add a new idea to the database
+     *
+     * @return 
+     */
+    public String create() {
+        Idea idea = new Idea();
+
+        idea.setTitle(this.title);
+        idea.setDescription(description);
+        ideaService.addIdea(idea);
+
+        return "/index.xhtml";
+    }    
     /** GET: Request context
      *
      * @return external context
