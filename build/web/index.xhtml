@@ -4,6 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="title">Index</ui:define>
     <ui:define name="content">
@@ -12,24 +13,9 @@
                 <b:column>
                     <h1>All Ideas</h1>
 
-                        	<h:dataTable value="">
-
-    			<h:column>
-    			
-    			</h:column>
-    			
-    			<h:column>
-    			
-    			</h:column>
-    			
-    			<h:column>
-    				
-    			</h:column>
-    			
-    			<h:column>
-    				
-    			</h:column>
-                    </h:dataTable>
+                        <c:forEach items="#{ideaBean.allIdeas}" var="idea">
+                               <p>#{idea.title}</p>
+                        </c:forEach>
                 </b:column>
             </b:row>
         </b:container>

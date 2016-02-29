@@ -5,7 +5,6 @@
  */
 package up678526.sums.bus;
 
-import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import up678526.sums.ents.Person;
@@ -22,29 +21,12 @@ public class PersonService {
     
     @EJB
     private PersonFacade personFacade; 
-    
-    protected PersonFacade getFacade(){
-        return this.personFacade; 
+
+    public boolean userExists(Person person) {
+        return personFacade.find(person.getEmail()) != null;
     }
-    
-    public Person find(Long id){
-        return getFacade().find(id); 
+    public void createNewUser(Person person){
+        personFacade.create(person);
     }
-    
-    public void create(Person person){
-        getFacade().create(person);
-    }
-    
-    public List<Person> findAll(){
-        return getFacade().findAll(); 
-    }
-    
-    public Person update(Person person) {
-        return getFacade().edit(person);
-    }
-    
-   public void remove(Person person){
-       getFacade().remove(person);
-   }
     
 }

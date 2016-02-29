@@ -33,6 +33,8 @@ public class Person implements Serializable {
     @OneToMany(mappedBy = "person")
     private List<Idea> ideas;
     
+    private Organisation organisation;
+    
     public Long getId() {
         return id;
     }
@@ -73,6 +75,14 @@ public class Person implements Serializable {
         this.ideas = ideas;
     }
 
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

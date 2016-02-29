@@ -31,7 +31,7 @@ public class Idea implements Serializable {
     private Person person; 
     
     private Boolean assigned;
-    
+         
     public Long getId() {
         return id;
     }

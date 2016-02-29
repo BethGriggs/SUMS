@@ -27,7 +27,7 @@ public class IdeaService {
     @EJB
     private IdeaFacade ideaFacade;
 
-    public Idea find(Long id) {
+    public Idea getIdea(Long id) {
         return ideaFacade.find(id);
     }
 
@@ -35,7 +35,7 @@ public class IdeaService {
         ideaFacade.create(idea);
     }
 
-    public List<Idea> findAll() {
+    public List<Idea> getAllIdeas() {
         return ideaFacade.findAll();
     }
 
@@ -46,4 +46,5 @@ public class IdeaService {
     public void remove(Idea idea) {
         ideaFacade.remove(idea);
     }
+    
 }
