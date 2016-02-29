@@ -5,7 +5,8 @@
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">Index</ui:define>
     <ui:define name="content">
         <b:container>
@@ -19,8 +20,10 @@
                             <h:outputText value="Description:"/>
                             <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
                         </h:panelGrid>
-                        
-                        <b:commandButton id="createIdea" value="Create Idea" action="#{ideaBean.create()}"/>         
+
+                        <h:commandButton value="Create Idea" action="#{ideaBean.create()}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>                
                     </h:form>
                 </b:column>
             </b:row>
