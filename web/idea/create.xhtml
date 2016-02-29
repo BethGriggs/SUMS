@@ -16,9 +16,11 @@
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5"> 
                             <h:outputText value="Title:"/>
-                            <b:inputText  id="titie" value="#{ideaBean.title}"></b:inputText>
+                            <b:inputText  id="title" value="#{ideaBean.title}"></b:inputText>
                             <h:outputText value="Description:"/>
                             <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
+                            <h:outputText value="Tags:"/>
+                            <b:inputText  id="tags" value="#{ideaBean.tags}"></b:inputText>
                         </h:panelGrid>
 
                         <h:commandButton value="Create Idea" action="#{ideaBean.create()}">

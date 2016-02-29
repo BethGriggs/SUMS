@@ -33,7 +33,8 @@ public class IdeaBean {
     private Idea idea = null;
     private String title;
     private String description;
-
+    private String tags;
+    
     @EJB
     private IdeaService ideaService;
 
@@ -63,6 +64,14 @@ public class IdeaBean {
     public List<Idea> getAllIdeas() {
         return allIdeas;
     }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }   
     
     /**
      * Add a new idea to the database
@@ -74,6 +83,7 @@ public class IdeaBean {
 
         idea.setTitle(this.title);
         idea.setDescription(description);
+        idea.setTags(tags);
         ideaService.addIdea(idea);
 
         return "/index.xhtml";

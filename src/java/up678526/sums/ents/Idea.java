@@ -25,7 +25,8 @@ public class Idea implements Serializable {
     private Long id;
     
     private String title; 
-    private String description; 
+    private String description;
+    private String tags;
    
     @ManyToOne
     private Person person; 
@@ -54,6 +55,14 @@ public class Idea implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public Person getPerson() {

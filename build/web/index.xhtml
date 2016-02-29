@@ -5,19 +5,37 @@
     xmlns:b="http://bootsfaces.net/ui"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="title">Index</ui:define>
     <ui:define name="content">
         <b:container>
-            <b:row>
-                <b:column>
-                    <h1>All Ideas</h1>
+            
+    		<b:dataTable value="#{ideaBean.allIdeas}" var="idea">
 
-                        <c:forEach items="#{ideaBean.allIdeas}" var="idea">
-                               <p>#{idea.title}</p>
-                        </c:forEach>
-                </b:column>
-            </b:row>
+    			<b:column>
+    				<!-- column header -->
+    				<f:facet name="header">Idea Title</f:facet>
+    				<!-- row record -->
+    				#{idea.title}
+    			</b:column>
+    			
+    			<b:column>
+    				<f:facet name="header">Description</f:facet>
+    				#{idea.description}
+    			</b:column> 
+                        <b:column>
+    				<f:facet name="header">Tags</f:facet>
+    				#{idea.tags}
+    			</b:column>      
+                    
+                    
+                    <b:column>
+                        <f:facet name="header">Actions</f:facet>
+                        <i class="fa fa-edit fa-2x"></i>
+                        <i class="fa fa-trash fa-2x"></i>
+                    </b:column>
+    		</b:dataTable>
         </b:container>
     </ui:define>
 </ui:composition>
