@@ -103,5 +103,6 @@ public class IdeaBean {
 
             int i = 1;
         }
+        
     } 
 }
