@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import up678526.sums.ents.Person;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-02-29T21:37:44")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-03-02T23:23:54")
 @StaticMetamodel(Idea.class)
 public class Idea_ { 
 

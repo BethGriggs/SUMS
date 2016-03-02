@@ -82,8 +82,8 @@ public class IdeaBean {
         Idea idea = new Idea();
 
         idea.setTitle(this.title);
-        idea.setDescription(description);
-        idea.setTags(tags);
+        idea.setDescription(this.description);
+        idea.setTags(this.tags);
         ideaService.addIdea(idea);
 
         return "/index.xhtml";
