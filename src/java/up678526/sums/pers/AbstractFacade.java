@@ -23,7 +23,6 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
-        System.out.println("in store"); 
         getEntityManager().persist(entity);
     }
 
