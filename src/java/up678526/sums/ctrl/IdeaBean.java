@@ -110,6 +110,10 @@ public class IdeaBean {
         return Long.parseLong("0");
     }
 
+    public void selectIdea(){
+        // check is student
+        // add idea to student 
+    } 
     /**
      * Initialise the controller variables based on a request parameter
      * 
@@ -121,11 +125,6 @@ public class IdeaBean {
         id = getLongParam("idea");
         if (id != 0) {
             idea = ideaService.getIdea(id);
-            //if (remoteUserIsAuthor()) {
-            //this.setEditText("Would you like to edit");
-            //}
-
-            int i = 1;
         }
         
     } 

@@ -23,17 +23,17 @@ public class PersonBean {
      * Creates a new instance of PersonBean
      */
     public PersonBean() {
-      
+
     }
-    
-    private String email; 
+
+    private String email;
     private String password;
 
-    private String type; 
-    
-    @EJB 
-    private PersonService personService; 
-    
+    private boolean isStudent = true;
+
+    @EJB
+    private PersonService personService;
+
     public PersonService getService() {
         return this.personService;
     }
@@ -54,14 +54,6 @@ public class PersonBean {
         this.password = password;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public PersonService getPersonService() {
         return personService;
     }
@@ -69,14 +61,28 @@ public class PersonBean {
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
-    
+
+    public boolean isStudent() {
+        return isStudent;
+    }
+
+    public void setIsStudent(boolean isStudent) {
+        this.isStudent = isStudent;
+    }
+
     public void register() {
-    
+
         Person user = new Person();
-        
+
         user.setPassword(this.password);
         user.setEmail(this.email);
+
+        if (isStudent) {
+            user.setType("STUDENT");
+        } else {
+            user.setType("STAFF");
+        }
+
+        personService.createNewUser(user);
     }
-    
-    
 }

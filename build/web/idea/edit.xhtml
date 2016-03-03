@@ -12,19 +12,20 @@
         <b:container>
             <b:row>
                 <b:column>
-                    <h1>Idea</h1>
+                    <h1>Edit an Idea</h1>
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5"> 
-                            <h:outputText value="Title: #{ideaBean.title}"></h:outputText>
-                            <br></br>
-                            <h:outputText value="Description: #{ideaBean.description}"></h:outputText>
-                            <br></br>
-                            <h:outputText value="Tags: #{ideaBean.tags}"></h:outputText>
+                            <h:outputText value="Title:"/>
+                            <b:inputText  id="title" value="#{ideaBean.title}"></b:inputText>
+                            <h:outputText value="Description:"/>
+                            <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
+                            <h:outputText value="Tags:"/>
+                            <b:inputText  id="tags" value="#{ideaBean.tags}"></b:inputText>
                         </h:panelGrid>
-                      
-                        <h:commandButton value="Select Idea" action="#{ideaBean.selectIdea()}">
+
+                        <h:commandButton value="Edit Idea" action="#{ideaBean.create()}">
                             <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>   
+                        </h:commandButton>                
                     </h:form>
                 </b:column>
             </b:row>
