@@ -86,7 +86,7 @@ public class IdeaBean {
         idea.setTags(this.tags);
         ideaService.addIdea(idea);
 
-        return "/index.xhtml";
+        return "/index.xhtml?faces-redirect=true";
     }    
     /** GET: Request context
      *
