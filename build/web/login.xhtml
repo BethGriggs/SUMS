@@ -9,7 +9,24 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="title">Login</ui:define>
     <ui:define name="content">
+        <b:container>
+            <b:row>
+                <b:column>
+                    <h1>Login to use SUMS</h1>
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5"> 
+                            <h:outputText value="Email:"/>
+                            <b:inputText  id="email" value="#{personBean.email}"></b:inputText>
+                            <h:outputText value="Password:"/>
+                            <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
+                        </h:panelGrid>
 
- 
+                        <h:commandButton value="Login" action="#{personBean.login()}">
+                            <f:ajax execute="@form" render="@form"/>
+                        </h:commandButton>                
+                    </h:form>
+                </b:column>
+            </b:row>
+        </b:container>
     </ui:define>
 </ui:composition>

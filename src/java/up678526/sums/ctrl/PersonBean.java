@@ -5,9 +5,12 @@
  */
 package up678526.sums.ctrl;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import up678526.sums.bus.PersonService;
 import up678526.sums.ents.Person;
 
@@ -16,8 +19,8 @@ import up678526.sums.ents.Person;
  * @author up678526
  */
 @Named(value = "personBean")
-@RequestScoped
-public class PersonBean {
+@SessionScoped
+public class PersonBean implements Serializable {
 
     /**
      * Creates a new instance of PersonBean
@@ -25,7 +28,7 @@ public class PersonBean {
     public PersonBean() {
 
     }
-
+    private Person current;     
     private String email;
     private String password;
 
@@ -84,5 +87,23 @@ public class PersonBean {
         }
 
         personService.createNewUser(user);
+    }
+    
+     /**
+     * Attempt login
+     * @return 
+     */
+    public String login(){ 
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        
+        boolean res= personService.userExists(email);
+        if (res) {
+            //validate credentials
+            externalContext.getSessionMap().put("email", this.email);
+            return "/index.html?faces-redirect=true";
+        }
+        else {
+            return "";
+        }
     }
 }

@@ -5,6 +5,7 @@
  */
 package up678526.sums.pers;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,7 +13,7 @@ import up678526.sums.ents.Person;
 
 /**
  *
- * @author beth
+ * @author up678526
  */
 @Stateless
 public class PersonFacade extends AbstractFacade<Person> {
@@ -29,4 +30,8 @@ public class PersonFacade extends AbstractFacade<Person> {
         super(Person.class);
     }
     
+    public List findUserByEmail(String email) {
+        List <Person> results = em.createNamedQuery("Person.findUserByEmail", Person.class).setParameter("email", email).getResultList(); 
+        return results;
+    }   
 }
