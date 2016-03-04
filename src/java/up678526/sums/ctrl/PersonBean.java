@@ -98,6 +98,7 @@ public class PersonBean implements Serializable {
         
         boolean res= personService.userExists(email);
         if (res) {
+            
             //validate credentials
             externalContext.getSessionMap().put("email", this.email);
             return "/index.html?faces-redirect=true";

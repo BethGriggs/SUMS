@@ -62,6 +62,7 @@ public class IdeaBean {
     
     // create Entity from properties 
     public List<Idea> getAllIdeas() {
+        allIdeas = ideaService.getAllIdeas();
         return allIdeas;
     }
 
@@ -113,19 +114,5 @@ public class IdeaBean {
     public void selectIdea(){
         // check is student
         // add idea to student 
-    } 
-    /**
-     * Initialise the controller variables based on a request parameter
-     * 
-     */
-    @PostConstruct
-    public void init() {
-        allIdeas = ideaService.getAllIdeas();
-
-        id = getLongParam("idea");
-        if (id != 0) {
-            idea = ideaService.getIdea(id);
-        }
-        
     } 
 }
