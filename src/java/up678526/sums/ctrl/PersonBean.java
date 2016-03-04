@@ -37,6 +37,14 @@ public class PersonBean implements Serializable {
     @EJB
     private PersonService personService;
 
+    public Person getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Person current) {
+        this.current = current;
+    }
+
     public PersonService getService() {
         return this.personService;
     }
@@ -85,7 +93,6 @@ public class PersonBean implements Serializable {
         } else {
             user.setType("STAFF");
         }
-
         personService.createNewUser(user);
     }
     
@@ -98,13 +105,25 @@ public class PersonBean implements Serializable {
         
         boolean res= personService.userExists(email);
         if (res) {
-            
             //validate credentials
-            externalContext.getSessionMap().put("email", this.email);
-            return "/index.html?faces-redirect=true";
+            current = personService.validateCredentials(email, password);
+            if (current != null){
+                externalContext.getSessionMap().put("user", current);
+                return "/index.html?faces-redirect=true";
+            }
+            else {
+                return "/index.html?faces-redirect=true";
+            }    
         }
         else {
             return "";
         }
+    }
+    
+    public String logout(){
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.invalidateSession();
+        current = null;
+        return "/index.xhtml?faces-redirect=true";
     }
 }

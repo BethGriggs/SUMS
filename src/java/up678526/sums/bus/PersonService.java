@@ -30,14 +30,15 @@ public class PersonService {
         return !persons.isEmpty();
     }
     
-    public void validateCredentials(String email, String password){
+    public Person validateCredentials(String email, String password){
         List<Person> persons =  personFacade.findUserByEmail(email);
         Person person = persons.get(0);
-        if (person.getEmail().equals(email) &&person.getPassword().equals(password)){
-        
-        }
+        //if (person.getEmail().equals(email) &&person.getPassword().equals(password)){
+            return person;
+        //}
+        //return null;
     }
-
+   
     public void createNewUser(Person person) {
         personFacade.create(person);
     }

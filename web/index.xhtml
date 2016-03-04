@@ -17,7 +17,7 @@
     				<!-- column header -->
     				<f:facet name="header">Idea Title</f:facet>
     				<!-- row record -->
-    				#{idea.title}
+    				#{idea.title} 
     			</b:column>
     			
     			<b:column>
@@ -36,5 +36,6 @@
     			</b:column> 
     		</b:dataTable>
         </b:container>
+            <h:outputText rendered="#{personBean.current != null}" value="#{personBean.current}"></h:outputText>
     </ui:define>
 </ui:composition>
