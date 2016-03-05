@@ -16,9 +16,11 @@
     </h:head>
     <h:body>
         <div class="container">
-            <b:navBar brand="SUMS" brandHref="#">
+            <b:navBar brand="SUMS" brandHref="/SUMS/">
                 <b:navbarLinks pull="right">
-                    <b:dropMenu value="Joe Bloggs">
+                    <b:navLink rendered="#{personBean.current == null}" value="Login"  outcome="/login"></b:navLink>
+
+                    <b:dropMenu rendered="#{personBean.current != null}" value="#{personBean.currentUserEmail}">
                         <b:navLink value="My Ideas" href="#"></b:navLink>
                         <b:navLink></b:navLink>
                         <b:navLink header="Staff Only"></b:navLink>

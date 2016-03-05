@@ -81,6 +81,10 @@ public class PersonBean implements Serializable {
         this.isStudent = isStudent;
     }
 
+    public String getCurrentUserEmail(){
+        return current.getEmail();
+    }
+    
     public void register() {
 
         Person user = new Person();
@@ -107,17 +111,18 @@ public class PersonBean implements Serializable {
         if (res) {
             //validate credentials
             current = personService.validateCredentials(email, password);
+                
             if (current != null){
                 externalContext.getSessionMap().put("user", current);
-                return "/index.html?faces-redirect=true";
             }
             else {
-                return "/index.html?faces-redirect=true";
+                return "/login.html?faces-redirect=true";
             }    
         }
         else {
-            return "";
+            return "/index.html?faces-redirect=true";
         }
+        return "/index.html?faces-rßedirect=true";
     }
     
     public String logout(){
