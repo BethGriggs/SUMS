@@ -21,11 +21,11 @@
                     <b:navLink rendered="#{personBean.current == null}" value="Login"  outcome="/login"></b:navLink>
 
                     <b:dropMenu rendered="#{personBean.current != null}" value="#{personBean.currentUserEmail}">
-                        <b:navLink value="My Ideas" href="#"></b:navLink>
-                        <b:navLink></b:navLink>
-                        <b:navLink header="Staff Only"></b:navLink>
-
-                        <b:navLink value="Create Idea" outcome="/idea/create"></b:navLink>
+                        <b:navLink rendered="#{personBean.currentUserType == 'STUDENT'}" value="Assigned Idea" href="#"></b:navLink>
+                        <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}"></b:navLink>
+                        <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" header="Staff Only"></b:navLink>
+                        <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" value="My Ideas" href="#"></b:navLink>
+                        <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" value="Create Idea" outcome="/idea/create"></b:navLink>
                         <b:navLink></b:navLink>
                         <b:navLink action="personBean.logout()" value="Logout" href="#"></b:navLink>
                     </b:dropMenu>

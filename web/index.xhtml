@@ -29,9 +29,9 @@
     			</b:column> 
                         <b:column>
     				<f:facet name="header">Actions</f:facet>
-                                <b:iconAwesome name="edit" size="2x"></b:iconAwesome>
-                                <b:iconAwesome name="trash" size="2x"></b:iconAwesome>
-                                <b:iconAwesome name="share" size="2x"></b:iconAwesome>
+                                <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="edit" size="2x"></b:iconAwesome>
+                                <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="trash" size="2x"></b:iconAwesome>
+                                <b:iconAwesome rendered="#{personBean.currentUserType == 'STUDENT'}" name="share" size="2x"></b:iconAwesome>
     			</b:column> 
     		</b:dataTable>
         </b:container>

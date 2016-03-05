@@ -85,6 +85,10 @@ public class PersonBean implements Serializable {
         return current.getEmail();
     }
     
+    public String getCurrentUserType(){
+        return current.getType();
+    }
+     
     public void register() {
 
         Person user = new Person();
