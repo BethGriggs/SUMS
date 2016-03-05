@@ -86,7 +86,12 @@ public class PersonBean implements Serializable {
     }
     
     public String getCurrentUserType(){
-        return current.getType();
+        if (current != null){
+            return current.getType();
+        }
+        else {
+            return null;
+        }
     }
      
     public void register() {

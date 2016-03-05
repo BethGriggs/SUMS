@@ -3,6 +3,7 @@
     template="/templates/template.xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:b="http://bootsfaces.net/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
@@ -27,12 +28,15 @@
     				<f:facet name="header">Tags</f:facet>
     				#{idea.tags}
     			</b:column> 
+                    
+                    <c:if test="#{personBean.current != null}">
                         <b:column>
-    				<f:facet name="header">Actions</f:facet>
+    				<f:facet rendered="#{personBean.current != null}" name="header">Actions</f:facet>
                                 <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="edit" size="2x"></b:iconAwesome>
                                 <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="trash" size="2x"></b:iconAwesome>
                                 <b:iconAwesome rendered="#{personBean.currentUserType == 'STUDENT'}" name="share" size="2x"></b:iconAwesome>
     			</b:column> 
+                    </c:if>
     		</b:dataTable>
         </b:container>
         <h:outputText rendered="#{personBean.current != null}" value="#{personBean.currentUserEmail}"></h:outputText>
