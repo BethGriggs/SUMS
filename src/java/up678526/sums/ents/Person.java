@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,8 +18,6 @@ import javax.persistence.OneToMany;
  * @author up678526
  */
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "Person.findUserByEmail", query = "SELECT p FROM Person p WHERE p.email = :email")})
 public class Person implements Serializable {
  
     private static final long serialVersionUID = 1L;

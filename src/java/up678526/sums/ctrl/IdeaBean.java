@@ -6,7 +6,6 @@
 package up678526.sums.ctrl;
 
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -104,7 +103,8 @@ public class IdeaBean {
         ideaService.addIdea(newIdea);
 
         return "/index.xhtml?faces-redirect=true";
-    }    
+    }  
+    
     /** GET: Request context
      *
      * @return external context
