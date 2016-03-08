@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import up678526.sums.ents.Idea;
+import up678526.sums.ents.Person;
 import up678526.sums.pers.IdeaFacade;
 
 /**
@@ -34,7 +35,7 @@ public class IdeaService {
     public void addIdea(Idea idea) {
         ideaFacade.create(idea);
     }
-
+ 
     public List<Idea> getAllIdeas() {
         return ideaFacade.findAll();
     }

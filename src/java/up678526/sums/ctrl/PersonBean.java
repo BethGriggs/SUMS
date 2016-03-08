@@ -6,12 +6,15 @@
 package up678526.sums.ctrl;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import up678526.sums.bus.IdeaService;
 import up678526.sums.bus.PersonService;
+import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
 /**
@@ -32,10 +35,11 @@ public class PersonBean implements Serializable {
     private String email;
     private String password;
     private String type;
-
+    private List<Idea> ownedIdeas;
+    
     @EJB
     private PersonService personService;
-
+    
     public Person getCurrent() {
         return current;
     }
@@ -92,7 +96,16 @@ public class PersonBean implements Serializable {
             return null;
         }
     }
-     
+
+    public List<Idea> getOwnedIdeas() {
+        return personService.getOwnedIdeas(current);
+    }
+
+    public void setOwnedIdeas(List<Idea> ownedIdeas) {
+        this.ownedIdeas = ownedIdeas;
+    }
+    
+    
     public void register() {
 
         Person user = new Person();

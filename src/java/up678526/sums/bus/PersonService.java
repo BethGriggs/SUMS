@@ -8,7 +8,9 @@ package up678526.sums.bus;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
+import up678526.sums.pers.IdeaFacade;
 import up678526.sums.pers.PersonFacade;
 
 /**
@@ -23,7 +25,10 @@ public class PersonService {
 
     @EJB
     private PersonFacade personFacade;
-
+    
+    @EJB
+    private IdeaFacade ideaFacade; 
+    
     public boolean userExists(String email) {
      
         List<Person> persons =  personFacade.findUserByEmail(email);
@@ -41,5 +46,9 @@ public class PersonService {
    
     public void createNewUser(Person person) {
         personFacade.create(person);
+    }
+    
+    public List<Idea> getOwnedIdeas(Person person){
+        return ideaFacade.findIdeasByOwner(person);
     }
 }

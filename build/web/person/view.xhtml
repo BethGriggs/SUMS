@@ -21,6 +21,33 @@
                         <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
                     </h:panelGrid>
 
+
+                    <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
+
+                    <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
+
+                        <b:column>
+                            <!-- column header -->
+                            <f:facet name="header">Idea Title</f:facet>
+                            <!-- row record -->
+                            #{idea.title} 
+                        </b:column>
+
+                        <b:column>
+                            <f:facet name="header">Description</f:facet>
+                                #{idea.description}
+                        </b:column> 
+                        <b:column>
+                            <f:facet name="header">Tags</f:facet>
+                                #{idea.tags}
+                        </b:column> 
+                        <b:column>
+                            <f:facet rendered="#{personBean.current != null}" name="header">Actions</f:facet>
+                            <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="edit" size="2x"></b:iconAwesome>
+                            <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="trash" size="2x"></b:iconAwesome>
+                        </b:column> 
+
+                    </b:dataTable>
                 </b:column>
             </b:row>
         </b:container>

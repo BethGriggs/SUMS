@@ -65,7 +65,7 @@ public class IdeaBean {
         allIdeas = ideaService.getAllIdeas();
         return allIdeas;
     }
-
+    
     public String getTags() {
         return tags;
     }
