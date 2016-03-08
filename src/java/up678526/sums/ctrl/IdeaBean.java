@@ -73,6 +73,22 @@ public class IdeaBean {
     public void setTags(String tags) {
         this.tags = tags;
     }   
+
+    public Idea getIdea() {
+        return idea;
+    }
+
+    public void setIdea(Idea idea) {
+        this.idea = idea;
+    } 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     /**
      * Add a new idea to the database
