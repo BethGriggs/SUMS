@@ -18,8 +18,9 @@
         <div class="container">
             <b:navBar brand="SUMS" brandHref="/SUMS/">
                 <b:navbarLinks pull="right">
+                    
                     <b:navLink rendered="#{personBean.current == null}" value="Login"  outcome="/login"></b:navLink>
-
+                    <b:navLink rendered="#{personBean.current == null}" value="Register"  outcome="/person/create"></b:navLink>
                     <b:dropMenu rendered="#{personBean.current != null}" value="#{personBean.currentUserEmail}">
                         <b:navLink rendered="#{personBean.currentUserType == 'STUDENT'}" value="Assigned Idea" href="#"></b:navLink>
                         <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}"></b:navLink>

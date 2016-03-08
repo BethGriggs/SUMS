@@ -100,6 +100,7 @@ public class PersonBean implements Serializable {
         user.setPassword(this.password);
         user.setEmail(this.email);
         user.setType(this.type.toUpperCase());
+      
         personService.createNewUser(user);
     }
     

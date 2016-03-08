@@ -21,14 +21,14 @@
                             <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
                             <h:outputText value="Type:"></h:outputText>
                             <b:selectOneMenu value="#{personBean.type}">
-                                <f:selectItem itemLabel="Student" value="STUDENT"/> 
-                                <f:selectItem itemLabel="Staff" value="STAFF"/> 
-                            </b:selectOneMenu>
+                                <f:selectItem itemLabel="Student" itemValue="STUDENT"/> 
+                                <f:selectItem itemLabel="Staff" itemValue="STAFF"/> 
+                            </b:selectOneMenu>                          
                         </h:panelGrid>
-                        <h:commandButton value="Register" action="#{personBean.register()}">
-                            <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>                
-                    </h:form>
+                      <h:commandButton value="Register" action="#{personBean.register()}">
+                        <f:ajax execute="@form" render="@form"/>
+                    </h:commandButton> 
+                    </h:form>   
                 </b:column>
             </b:row>
         </b:container>

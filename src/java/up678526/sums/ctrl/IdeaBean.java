@@ -13,6 +13,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
 import up678526.sums.ents.Idea;
+import up678526.sums.ents.Person;
 
 /**
  *
@@ -95,11 +96,15 @@ public class IdeaBean {
      * @return 
      */
     public String create() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Person currentUser = (Person)externalContext.getSessionMap().get("user");
+        
         Idea newIdea = new Idea();
 
         newIdea.setTitle(this.title);
         newIdea.setDescription(this.description);
         newIdea.setTags(this.tags);
+        newIdea.setPerson(currentUser);
         ideaService.addIdea(newIdea);
 
         return "/index.xhtml?faces-redirect=true";
