@@ -28,6 +28,7 @@
                         <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" value="My Ideas" href="#"></b:navLink>
                         <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" value="Create Idea" outcome="/idea/create"></b:navLink>
                         <b:navLink></b:navLink>
+                        <b:navLink  value="My Account" outcome="/person/view"></b:navLink>
                         <b:navLink action="personBean.logout()" value="Logout" href="#"></b:navLink>
                     </b:dropMenu>
                 </b:navbarLinks>
