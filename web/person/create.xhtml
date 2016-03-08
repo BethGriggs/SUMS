@@ -20,9 +20,9 @@
                             <h:outputText value="Password:"/>
                             <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
                             <h:outputText value="Type:"></h:outputText>
-                            <b:selectOneMenu>
-                                <f:selectItem itemLabel="Student"/> 
-                                <f:selectItem itemLabel="Staff"/> 
+                            <b:selectOneMenu value="#{personBean.type}">
+                                <f:selectItem itemLabel="Student" value="STUDENT"/> 
+                                <f:selectItem itemLabel="Staff" value="STAFF"/> 
                             </b:selectOneMenu>
                         </h:panelGrid>
                         <h:commandButton value="Register" action="#{personBean.register()}">

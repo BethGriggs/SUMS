@@ -96,12 +96,12 @@ public class IdeaBean {
      * @return 
      */
     public String create() {
-        Idea idea = new Idea();
+        Idea newIdea = new Idea();
 
-        idea.setTitle(this.title);
-        idea.setDescription(this.description);
-        idea.setTags(this.tags);
-        ideaService.addIdea(idea);
+        newIdea.setTitle(this.title);
+        newIdea.setDescription(this.description);
+        newIdea.setTags(this.tags);
+        ideaService.addIdea(newIdea);
 
         return "/index.xhtml?faces-redirect=true";
     }    

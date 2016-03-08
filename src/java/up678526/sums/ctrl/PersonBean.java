@@ -31,8 +31,7 @@ public class PersonBean implements Serializable {
     private Person current;     
     private String email;
     private String password;
-
-    private boolean isStudent = true;
+    private String type;
 
     @EJB
     private PersonService personService;
@@ -73,12 +72,12 @@ public class PersonBean implements Serializable {
         this.personService = personService;
     }
 
-    public boolean isStudent() {
-        return isStudent;
+    public String getType() {
+        return type;
     }
 
-    public void setIsStudent(boolean isStudent) {
-        this.isStudent = isStudent;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getCurrentUserEmail(){
@@ -100,12 +99,7 @@ public class PersonBean implements Serializable {
 
         user.setPassword(this.password);
         user.setEmail(this.email);
-
-        if (isStudent) {
-            user.setType("STUDENT");
-        } else {
-            user.setType("STAFF");
-        }
+        user.setType(this.type.toUpperCase());
         personService.createNewUser(user);
     }
     
