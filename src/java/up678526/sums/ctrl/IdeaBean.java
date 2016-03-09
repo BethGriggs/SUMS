@@ -5,10 +5,17 @@
  */
 package up678526.sums.ctrl;
 
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.paramValueType;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
@@ -20,16 +27,17 @@ import up678526.sums.ents.Person;
  * @author up678526
  */
 @Named(value = "ideaBean")
-@RequestScoped
-public class IdeaBean {
+@SessionScoped
+public class IdeaBean implements Serializable {
 
     /**
      * Creates a new instance of IdeaBean
      */
     public IdeaBean() {
     }
-
-    private Long id;
+   
+    @ManagedProperty(value="#{param.id}")
+    private String selectedId;
     private Idea idea = null;
     private String title;
     private String description;
@@ -51,7 +59,7 @@ public class IdeaBean {
     public String getDescription() {
         return description;
     }
-
+    
     public void setDescription(String description) {
         this.description = description;
     }
@@ -65,6 +73,15 @@ public class IdeaBean {
         allIdeas = ideaService.getAllIdeas();
         return allIdeas;
     }
+
+    public String getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(String selectedId) {
+        this.selectedId = selectedId;
+    }
+    
     
     public String getTags() {
         return tags;
@@ -82,14 +99,6 @@ public class IdeaBean {
         this.idea = idea;
     } 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
     /**
      * Add a new idea to the database
      *
@@ -107,33 +116,27 @@ public class IdeaBean {
         newIdea.setPerson(currentUser);
         ideaService.addIdea(newIdea);
 
-        return "/index.xhtml?faces-redirect=true";
+        return "/index?faces-redirect=true";
     }  
     
-    /** GET: Request context
-     *
-     * @return external context
-     */
-    protected ExternalContext request() {
-        return FacesContext.getCurrentInstance().getExternalContext();
+    public String prepareView(){
+        idea = ideaService.getIdea(Long.parseLong(selectedId));
+        
+        if(idea != null){
+        return "/idea/view?faces-redirect=true";
+        }
+        else{
+            return "";
+        }
     }
     
-    /** Get the URL param
-     *
-     * @param param value
-     * @return long
-     */
-        protected Long getLongParam(String param) {
-        FacesContext.getCurrentInstance().getExternalContext();
-        param = request().getRequestParameterMap().get(param);
-        if (param != null) {
-            return Long.parseLong(param);
-        }
-        return Long.parseLong("0");
+    public void retrieve(){
+       idea = ideaService.getIdea(Long.parseLong(selectedId));
     }
 
     public void selectIdea(){
         // check is student
         // add idea to student 
     } 
+
 }
