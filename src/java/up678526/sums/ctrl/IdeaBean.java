@@ -119,6 +119,12 @@ public class IdeaBean implements Serializable {
         return "/index?faces-redirect=true";
     }  
     
+    public String update(){
+       // check who it is owned by maybe? 
+       ideaService.update(idea);
+       return "/idea/view?faces-redirect=true";
+    }
+    
     public String prepareView(){
         idea = ideaService.getIdea(Long.parseLong(selectedId));
         
@@ -128,6 +134,13 @@ public class IdeaBean implements Serializable {
         else{
             return "";
         }
+    }
+    
+    public String prepareEdit(){
+      if (idea != null){
+          return "/idea/edit?faces-redirect=true";
+      }
+        return "";
     }
     
     public void retrieve(){

@@ -7,26 +7,32 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
-    <ui:define name="title">Index</ui:define>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{ideaBean.selectedId}"/>
+        <f:event type="preRenderView" listener="#{ideaBean.retrieve}"/>
+    </f:metadata>
+    <ui:define name="title">Blah</ui:define>
     <ui:define name="content">
         <b:container>
             <b:row>
                 <b:column>
-                    <h1>Edit an Idea</h1>
+                    <h1>Edit Idea</h1>
                     <h:form>
                         <h:panelGrid columns="2" cellpadding="5"> 
                             <h:outputText value="Title:"/>
-                            <b:inputText  id="title" value="#{ideaBean.title}"></b:inputText>
+                            <b:inputText  id="title" value="#{ideaBean.idea.title}"></b:inputText>
                             <h:outputText value="Description:"/>
-                            <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
+                            <b:inputTextarea id="description" value="#{ideaBean.idea.description}"></b:inputTextarea>
                             <h:outputText value="Tags:"/>
-                            <b:inputText  id="tags" value="#{ideaBean.tags}"></b:inputText>
+                            <b:inputText  id="tags" value="#{ideaBean.idea.tags}"></b:inputText>
                         </h:panelGrid>
 
-                        <h:commandButton value="Edit Idea" action="#{ideaBean.create()}">
+
+                        <h:commandButton value="Update" action="#{ideaBean.update()}">
                             <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>                
-                    </h:form>
+                        </h:commandButton>   
+                    </h:form> 
                 </b:column>
             </b:row>
         </b:container>
