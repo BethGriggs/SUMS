@@ -18,12 +18,17 @@
             <b:row>
                 <b:column>
                     <h1>View an Idea</h1>
-                   
+                    <h:form>
                         <h:panelGrid columns="1" cellpadding="5"> 
                             <h:outputText value="Title: #{ideaBean.idea.title}"/>
                             <h:outputText value="Description: #{ideaBean.idea.description}"/>
                             <h:outputText value="Tags: #{ideaBean.idea.tags}"/>
                         </h:panelGrid>
+                        
+                        <h:commandButton rendered="#{personBean.currentUserType == 'STUDENT'}" value="Select Idea"></h:commandButton>
+                        <h:commandButton rendered="#{personBean.currentUserType == 'STAFF'}" value="Edit Idea"></h:commandButton>
+                    </h:form>
+                       
                 </b:column>
             </b:row>
         </b:container>
