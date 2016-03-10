@@ -4,6 +4,7 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:b="http://bootsfaces.net/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
 
@@ -21,7 +22,11 @@
                         <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
                     </h:panelGrid>
 
+                    <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STUDENT')}">
+                        <h1>Assigned Idea</h1>
+                    </c:if>
 
+                    <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
                     <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
 
                     <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
@@ -37,17 +42,25 @@
                             <f:facet name="header">Description</f:facet>
                                 #{idea.description}
                         </b:column> 
+                        
                         <b:column>
                             <f:facet name="header">Tags</f:facet>
                                 #{idea.tags}
                         </b:column> 
+                      
+                        
                         <b:column>
-                            <f:facet rendered="#{personBean.current != null}" name="header">Actions</f:facet>
-                            <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="edit" size="2x"></b:iconAwesome>
-                            <b:iconAwesome rendered="#{personBean.currentUserType == 'STAFF'}" name="trash" size="2x"></b:iconAwesome>
+                            <f:facet name="header">Edit</f:facet>
+                            <h:link  value="" outcome="/idea/edit">
+                                <i class="fa fa-edit fa-2x"></i>
+                                <f:param name="id" value="#{idea.id}"/>
+                            </h:link>
                         </b:column> 
+                        
+                        
 
                     </b:dataTable>
+                    </c:if>
                 </b:column>
             </b:row>
         </b:container>

@@ -28,7 +28,10 @@
                         <h:link outcome="/idea/edit" rendered="#{personBean.currentUserType == 'STAFF'}" value="Edit Idea">
                             <f:param name="id" value="#{ideaBean.idea.id}"/>
                         </h:link>
-                    
+                  
+                        <h:link outcome="/person/view" rendered="#{personBean.currentUserType == 'STUDENT'}" value="Select Idea">
+                            <f:param name="id" value="#{ideaBean.idea.id}"/>
+                        </h:link>
                 </b:column>
             </b:row>
         </b:container>
