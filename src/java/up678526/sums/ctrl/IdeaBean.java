@@ -125,6 +125,11 @@ public class IdeaBean implements Serializable {
        return "/idea/view?faces-redirect=true";
     }
     
+    public String delete(){
+        ideaService.remove(idea);
+        return "/index";
+    }
+                
     public String prepareView(){
         idea = ideaService.getIdea(Long.parseLong(selectedId));
         

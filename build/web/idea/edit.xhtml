@@ -32,6 +32,11 @@
                         <h:commandButton value="Update" action="#{ideaBean.update()}">
                             <f:ajax execute="@form" render="@form"/>
                         </h:commandButton>   
+                        
+                        <h:commandButton value="Delete" action="#{ideaBean.delete()}">
+                            <f:ajax execute="@form" render="@form"></f:ajax>
+                        </h:commandButton>
+                            
                     </h:form> 
                 </b:column>
             </b:row>
