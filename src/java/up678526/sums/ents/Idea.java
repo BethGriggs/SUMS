@@ -29,7 +29,9 @@ public class Idea implements Serializable {
     private String tags;
    
     @ManyToOne
-    private Person person; 
+    private Person owner; 
+    
+    private Person student;
     
     private Boolean assigned;
          
@@ -65,14 +67,23 @@ public class Idea implements Serializable {
         this.tags = tags;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getOwner() {
+        return owner;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 
+    public Person getStudent() {
+        return student;
+    }
+
+    public void setStudent(Person student) {
+        this.student = student;
+    }
+
+    
     public Boolean getAssigned() {
         return assigned;
     }

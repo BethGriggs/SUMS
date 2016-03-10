@@ -7,9 +7,9 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
-    
-     <f:metadata>
-         <f:viewParam name="id" value="#{ideaBean.selectedId}"/>
+
+    <f:metadata>
+        <f:viewParam name="id" value="#{ideaBean.selectedId}"/>
         <f:event type="preRenderView" listener="#{ideaBean.retrieve}"/>
     </f:metadata>
     <ui:define name="title">Blah</ui:define>
@@ -18,20 +18,18 @@
             <b:row>
                 <b:column>
                     <h1>View an Idea</h1>
-                   
+                    <h:form> 
                         <h:panelGrid columns="1" cellpadding="5"> 
                             <h:outputText value="Title: #{ideaBean.idea.title}"/>
                             <h:outputText value="Description: #{ideaBean.idea.description}"/>
                             <h:outputText value="Tags: #{ideaBean.idea.tags}"/>
                         </h:panelGrid>
-                       
-                        <h:link outcome="/idea/edit" rendered="#{personBean.currentUserType == 'STAFF'}" value="Edit Idea">
-                            <f:param name="id" value="#{ideaBean.idea.id}"/>
-                        </h:link>
-                  
-                        <h:link outcome="/person/view" rendered="#{personBean.currentUserType == 'STUDENT'}" value="Select Idea">
-                            <f:param name="id" value="#{ideaBean.idea.id}"/>
-                        </h:link>
+
+
+                        <b:commandButton action="#{ideaBean.assignIdea()}" rendered="#{personBean.currentUserType == 'STUDENT'}" value="Select Idea">
+                            <f:ajax execute="@form" render="@form"/>
+                        </b:commandButton>
+                    </h:form>
                 </b:column>
             </b:row>
         </b:container>

@@ -48,4 +48,8 @@ public class IdeaService {
         ideaFacade.remove(idea);
     }
     
+    public void assignIdeaToStudent(Idea idea, Person student){
+        idea.setStudent(student);
+        ideaFacade.edit(idea);
+    }
 }

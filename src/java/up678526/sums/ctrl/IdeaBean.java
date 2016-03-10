@@ -5,17 +5,12 @@
  */
 package up678526.sums.ctrl;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.paramValueType;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
@@ -113,7 +108,7 @@ public class IdeaBean implements Serializable {
         newIdea.setTitle(this.title);
         newIdea.setDescription(this.description);
         newIdea.setTags(this.tags);
-        newIdea.setPerson(currentUser);
+        newIdea.setOwner(currentUser);
         ideaService.addIdea(newIdea);
 
         return "/index?faces-redirect=true";
@@ -152,9 +147,11 @@ public class IdeaBean implements Serializable {
        idea = ideaService.getIdea(Long.parseLong(selectedId));
     }
 
-    public void selectIdea(){
-        // check is student
-        // add idea to student 
+    public void assignIdea(){
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Person currentUser = (Person)externalContext.getSessionMap().get("user");
+        
+        ideaService.assignIdeaToStudent(idea, currentUser);
     } 
 
 }

@@ -33,7 +33,7 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     
     public List<Idea> findIdeasByOwner(Person person){
         List <Idea> results = em
-                .createQuery("SELECT i FROM Idea i WHERE i.person.id = :id", Idea.class)
+                .createQuery("SELECT i FROM Idea i WHERE i.owner.id = :id", Idea.class)
                 .setParameter("id", person.getId())
                 .getResultList(); 
         return results;  

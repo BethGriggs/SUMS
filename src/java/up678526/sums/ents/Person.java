@@ -30,7 +30,7 @@ public class Person implements Serializable {
     private String password;
     private String type;
     
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "owner")
     private List<Idea> ideas;
     
     private Organisation organisation;
