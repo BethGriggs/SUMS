@@ -133,13 +133,13 @@ public class PersonBean implements Serializable {
                 externalContext.getSessionMap().put("user", current);
             }
             else {
-                return "/login.html?faces-redirect=true";
+                return "/login?faces-redirect=true";
             }    
         }
         else {
-            return "/index.html?faces-redirect=true";
+            return "/login?faces-redirect=true";
         }
-        return "/index.html?faces-rßedirect=true";
+        return "/index?faces-redirect=true";
     }
     
     public String logout(){
