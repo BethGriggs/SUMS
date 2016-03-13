@@ -12,7 +12,6 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import up678526.sums.bus.IdeaService;
 import up678526.sums.bus.PersonService;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
@@ -123,7 +122,6 @@ public class PersonBean implements Serializable {
      */
     public String login(){ 
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        
         boolean res= personService.userExists(email);
         if (res) {
             //validate credentials
@@ -144,8 +142,9 @@ public class PersonBean implements Serializable {
     
     public String logout(){
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.getSessionMap().remove("user");
         externalContext.invalidateSession();
         current = null;
-        return "/index.xhtml?faces-redirect=true";
+        return "/index?faces-redirect=true";
     }
 }

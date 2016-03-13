@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 13, 2016, 7:45:33 PM
+    Author     : up678526
+*/
+
+.logout {
+    text-decoration: none; 
+    padding-left: 11%;
+    color: black;
+}
+
+.logout:hover {
+    text-decoration: none; 
+}

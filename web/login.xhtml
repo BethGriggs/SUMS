@@ -11,21 +11,20 @@
     <ui:define name="content">
         <b:container>
             <b:row>
-                <b:column>
-                    <h1>Login to use SUMS</h1>
+                <h1>Login to use SUMS</h1>
+                <b:well>
                     <h:form>
-                        <h:panelGrid columns="2" cellpadding="5"> 
+                        <b:panelGrid columns="4,8"> 
                             <h:outputText value="Email:"/>
                             <b:inputText  id="email" value="#{personBean.email}"></b:inputText>
                             <h:outputText value="Password:"/>
                             <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
-                        </h:panelGrid>
-
-                        <h:commandButton value="Login" action="#{personBean.login()}">
-                            <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>                
+                        </b:panelGrid>
+                        <b:row class="pull-right">
+                            <b:commandButton value="Login" action="#{personBean.login()}" ajax="true"></b:commandButton> 
+                        </b:row>
                     </h:form>
-                </b:column>
+                </b:well>
             </b:row>
         </b:container>
     </ui:define>
