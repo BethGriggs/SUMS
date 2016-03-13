@@ -7,28 +7,26 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
-    <ui:define name="title">Index</ui:define>
+    <ui:define name="title">Create Idea</ui:define>
     <ui:define name="content">
-        <b:container>
-            <b:row>
-                <b:column>
-                    <h1>Create an Idea</h1>
+        <b:row>
+            <b:column class="centered-text">
+                <b:panel>
+                    <h1>Create Idea</h1>
                     <h:form>
-                        <h:panelGrid columns="2" cellpadding="5"> 
-                            <h:outputText value="Title:"/>
+                        <b:panelGrid columns="4,8"> 
+                            <h:outputLabel value="Title:"/>
                             <b:inputText  id="title" value="#{ideaBean.title}"></b:inputText>
-                            <h:outputText value="Description:"/>
+                            <h:outputLabel value="Description:"/>
                             <b:inputTextarea id="description" value="#{ideaBean.description}"></b:inputTextarea>
-                            <h:outputText value="Tags:"/>
+                            <h:outputLabel value="Tags:"/>
                             <b:inputText  id="tags" value="#{ideaBean.tags}"></b:inputText>
-                        </h:panelGrid>
+                        </b:panelGrid>
 
-                        <h:commandButton value="Create Idea" action="#{ideaBean.create()}">
-                            <f:ajax execute="@form" render="@form"/>
-                        </h:commandButton>                
-                    </h:form>
-                </b:column>
-            </b:row>
-        </b:container>
+                        <b:commandButton value="Create Idea" action="#{ideaBean.create()}" class="pull-right" look="primary" ajax="true"></b:commandButton>   
+                    </h:form> 
+                </b:panel>
+            </b:column>
+        </b:row>
     </ui:define>
 </ui:composition>

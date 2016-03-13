@@ -105,7 +105,7 @@ public class PersonBean implements Serializable {
     }
     
     
-    public void register() {
+    public String register() {
 
         Person user = new Person();
 
@@ -114,6 +114,7 @@ public class PersonBean implements Serializable {
         user.setType(this.type.toUpperCase());
       
         personService.createNewUser(user);
+        return "/login?faces-redirect=true";
     }
     
      /**
