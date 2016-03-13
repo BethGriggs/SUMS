@@ -24,7 +24,7 @@ public class Organisation implements Serializable {
     private Long id;
 
     private String name; 
-    private String description; 
+    private String departmentActivities; 
     
     public Long getId() {
         return id;
@@ -42,14 +42,14 @@ public class Organisation implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDepartmentActivities() {
+        return departmentActivities;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDepartmentActivities(String departmentActivities) {
+        this.departmentActivities = departmentActivities;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
