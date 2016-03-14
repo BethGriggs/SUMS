@@ -5,7 +5,11 @@
  */
 package up678526.sums.bus;
 
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import up678526.sums.ents.Organisation;
+import up678526.sums.pers.OrganisationFacade;
 
 /**
  *
@@ -14,8 +18,15 @@ import javax.ejb.Stateless;
 @Stateless
 public class OrganisationService {
 
-    public String createOrganisation() {
-        return null;
+    @EJB
+    private OrganisationFacade organisationFacade;
+    
+    public void createOrganisation(Organisation organisation) {
+        organisationFacade.create(organisation);
+    }
+    
+    public List<Organisation> getOrganisations(){
+        return organisationFacade.findAll();
     }
 
 }

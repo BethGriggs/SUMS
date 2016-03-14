@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    template="/templates/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:b="http://bootsfaces.net/ui"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:define name="title">Organisations</ui:define>
+    <ui:define name="content">
+        <b:container>
+             <h:form>
+                 <b:dataTable rendered="#{organisationBean.organisations != null}" value="#{organisationBean.organisations}" var="organisation">
+
+    			<b:column>
+    				<f:facet name="header">Name</f:facet>
+                                <h:outputText id="itemTitle" value="#{organisation.name}"/>
+    			</b:column>
+    			
+    			<b:column>
+    				<f:facet name="header">Department Activities</f:facet>
+    				#{organisation.departmentActivities}
+    			</b:column> 
+                        <b:column>
+    				<f:facet name="header">Select</f:facet>
+    			
+    			</b:column> 
+    		</b:dataTable>
+                </h:form>
+        </b:container>        
+    </ui:define>
+</ui:composition>
