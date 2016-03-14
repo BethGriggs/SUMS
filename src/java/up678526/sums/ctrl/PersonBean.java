@@ -7,12 +7,16 @@ package up678526.sums.ctrl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.PersonService;
+import up678526.sums.bus.exception.AuthenticationException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
@@ -30,15 +34,15 @@ public class PersonBean implements Serializable {
     public PersonBean() {
 
     }
-    private Person current;     
+    private Person current;
     private String email;
     private String password;
     private String type;
     private List<Idea> ownedIdeas;
-    
+
     @EJB
     private PersonService personService;
-    
+
     public Person getCurrent() {
         return current;
     }
@@ -83,15 +87,14 @@ public class PersonBean implements Serializable {
         this.type = type;
     }
 
-    public String getCurrentUserEmail(){
+    public String getCurrentUserEmail() {
         return current.getEmail();
     }
-    
-    public String getCurrentUserType(){
-        if (current != null){
+
+    public String getCurrentUserType() {
+        if (current != null) {
             return current.getType();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -103,8 +106,7 @@ public class PersonBean implements Serializable {
     public void setOwnedIdeas(List<Idea> ownedIdeas) {
         this.ownedIdeas = ownedIdeas;
     }
-    
-    
+
     public String register() {
 
         Person user = new Person();
@@ -112,36 +114,40 @@ public class PersonBean implements Serializable {
         user.setPassword(this.password);
         user.setEmail(this.email);
         user.setType(this.type.toUpperCase());
-      
+
         personService.createNewUser(user);
         return "/login?faces-redirect=true";
     }
-    
-     /**
+
+    /**
      * Attempt login
-     * @return 
+     *
+     * @return
      */
-    public String login(){ 
+    public String login() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        boolean res= personService.userExists(email);
+        boolean res = personService.userExists(email);
         if (res) {
-            //validate credentials
-            current = personService.validateCredentials(email, password);
-                
-            if (current != null){
-                externalContext.getSessionMap().put("user", current);
+            try {
+                //validate credentials
+                current = personService.validateCredentials(email, password);
+            } catch (AuthenticationException ex) {
+                FacesContext.getCurrentInstance().addMessage("loginError", new FacesMessage("Failed to login: ", ex.getMessage()));
+                Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else {
-                return "/login?faces-redirect=true";
-            }    
-        }
-        else {
-            return "/login?faces-redirect=true";
+
+            if (current != null) {
+                externalContext.getSessionMap().put("user", current);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
         }
         return "/index?faces-redirect=true";
     }
-    
-    public String logout(){
+
+    public String logout() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.getSessionMap().remove("user");
         externalContext.invalidateSession();

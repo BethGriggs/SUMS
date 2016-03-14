@@ -20,7 +20,10 @@
                             <h:outputLabel value="Password:"/>
                             <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
                         </b:panelGrid>
-                        <b:commandButton value="Login" action="#{personBean.login()}" ajax="true" look="primary" class="pull-right"></b:commandButton> 
+                        <b:commandButton value="Login" action="#{personBean.login()}" ajax="true" update="@form" look="primary" class="pull-right"></b:commandButton> 
+                        <b:row>
+                            <b:messages id="loginError"></b:messages>
+                        </b:row>
                     </h:form> 
                 </b:panel>
             </b:column>

@@ -8,6 +8,7 @@ package up678526.sums.bus;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import up678526.sums.bus.exception.AuthenticationException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 import up678526.sums.pers.IdeaFacade;
@@ -35,13 +36,21 @@ public class PersonService {
         return !persons.isEmpty();
     }
     
-    public Person validateCredentials(String email, String password){
+    public Person validateCredentials(String email, String password) throws AuthenticationException {
         List<Person> persons =  personFacade.findUserByEmail(email);
-        Person person = persons.get(0);
-        //if (person.getEmail().equals(email) &&person.getPassword().equals(password)){
+        if (persons.isEmpty()) {
+            throw new AuthenticationException("Invalid username or password.");
+        }
+        else {
+           Person person = persons.get(0);
+            if (person.getEmail().equals(email) &&person.getPassword().equals(password)){
             return person;
-        //}
-        //return null;
+        }
+            else {
+                // in report write about why this error message is this!!
+                throw new AuthenticationException("Invalid username or password.");
+            }
+        }
     }
    
     public void createNewUser(Person person) {
