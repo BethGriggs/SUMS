@@ -26,38 +26,30 @@ public class PersonService {
 
     @EJB
     private PersonFacade personFacade;
-    
+
     @EJB
-    private IdeaFacade ideaFacade; 
-    
-    public boolean userExists(String email) {
-     
-        List<Person> persons =  personFacade.findUserByEmail(email);
-        return !persons.isEmpty();
-    }
-    
+    private IdeaFacade ideaFacade;
+
     public Person validateCredentials(String email, String password) throws AuthenticationException {
-        List<Person> persons =  personFacade.findUserByEmail(email);
+        List<Person> persons = personFacade.findUserByEmail(email);
         if (persons.isEmpty()) {
             throw new AuthenticationException("Invalid username or password.");
-        }
-        else {
-           Person person = persons.get(0);
-            if (person.getEmail().equals(email) &&person.getPassword().equals(password)){
-            return person;
-        }
-            else {
+        } else {
+            Person person = persons.get(0);
+            if (person.getEmail().equals(email) && person.getPassword().equals(password)) {
+                return person;
+            } else {
                 // in report write about why this error message is this!!
                 throw new AuthenticationException("Invalid username or password.");
             }
         }
     }
-   
+
     public void createNewUser(Person person) {
         personFacade.create(person);
     }
-    
-    public List<Idea> getOwnedIdeas(Person person){
+
+    public List<Idea> getOwnedIdeas(Person person) {
         return ideaFacade.findIdeasByOwner(person);
     }
 }

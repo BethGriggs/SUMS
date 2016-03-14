@@ -38,7 +38,6 @@ public class PersonBean implements Serializable {
     private String email;
     private String password;
     private String type;
-    private List<Idea> ownedIdeas;
 
     @EJB
     private PersonService personService;
@@ -103,10 +102,6 @@ public class PersonBean implements Serializable {
         return personService.getOwnedIdeas(current);
     }
 
-    public void setOwnedIdeas(List<Idea> ownedIdeas) {
-        this.ownedIdeas = ownedIdeas;
-    }
-
     public String register() {
 
         Person user = new Person();
@@ -126,24 +121,20 @@ public class PersonBean implements Serializable {
      */
     public String login() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        boolean res = personService.userExists(email);
-        if (res) {
-            try {
-                //validate credentials
-                current = personService.validateCredentials(email, password);
-            } catch (AuthenticationException ex) {
-                FacesContext.getCurrentInstance().addMessage("loginError", new FacesMessage("Failed to login: ", ex.getMessage()));
-                Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            //validate user credentials
+            current = personService.validateCredentials(email, password);
+        } catch (AuthenticationException ex) {
+            FacesContext.getCurrentInstance().addMessage("loginError", new FacesMessage("Failed to login: ", ex.getMessage()));
+            Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-            if (current != null) {
-                externalContext.getSessionMap().put("user", current);
-            } else {
-                return null;
-            }
+        if (current != null) {
+            externalContext.getSessionMap().put("user", current);
         } else {
             return null;
         }
+
         return "/index?faces-redirect=true";
     }
 
