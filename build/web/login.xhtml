@@ -21,7 +21,7 @@
                             <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
                         </b:panelGrid>
                         <b:row>
-                            <b:messages id="loginError" class="ERROR"></b:messages>
+                            <b:messages id="loginError"></b:messages>
                         </b:row>
                         <b:commandButton value="Login" action="#{personBean.login()}" ajax="true" update="@form" look="primary" class="pull-right"></b:commandButton> 
 

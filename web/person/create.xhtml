@@ -16,15 +16,22 @@
                     <h:form>
                         <b:panelGrid columns="4,8">
                             <h:outputText value="Email:"/>
-                            <b:inputText  id="email" value="#{personBean.email}"></b:inputText>
+                            <b:inputText  id="email" value="#{personBean.email}" required="true" requiredMessage="Please enter a valid email." validatorMessage="Please enter a valid email.">
+                                <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                            </b:inputText>
                             <h:outputText value="Password:"/>
-                            <b:inputSecret id="password" value="#{personBean.password}"></b:inputSecret>
+                            <b:inputSecret id="password" value="#{personBean.password}" validatorMessage="Password must contain at least 6 characters.">
+                                <f:validateLength minimum="6" maximum="255" />
+                            </b:inputSecret>
                             <h:outputText value="Type:"></h:outputText>
                             <b:selectOneMenu value="#{personBean.type}">
                                 <f:selectItem itemLabel="Student" itemValue="STUDENT"/> 
                                 <f:selectItem itemLabel="Staff" itemValue="STAFF"/> 
                             </b:selectOneMenu>                          
                         </b:panelGrid>
+                        <b:row>
+                             <b:messages id="loginError"></b:messages>
+                        </b:row>
                         <b:commandButton value="Register" action="#{personBean.register()}" ajax="true" look="primary" class="pull-right"></b:commandButton> 
                     </h:form> 
                 </b:panel>
