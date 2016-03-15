@@ -12,7 +12,7 @@
         <f:viewParam name="id" value="#{ideaBean.selectedId}"/>
         <f:event type="preRenderView" listener="#{ideaBean.retrieve}"/>
     </f:metadata>
-    <ui:define name="title">Blah</ui:define>
+    <ui:define name="title">#{ideaBean.idea.title}</ui:define>
     <ui:define name="content">
         <b:container>
             <b:row>

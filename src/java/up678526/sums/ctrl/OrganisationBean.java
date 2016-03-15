@@ -67,6 +67,5 @@ public class OrganisationBean implements Serializable {
         organisationService.createOrganisation(organisation);
         return "/organisation/view?faces-redirect=true";
     }  
-    
        
 }
