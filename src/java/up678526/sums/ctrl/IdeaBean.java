@@ -65,7 +65,7 @@ public class IdeaBean implements Serializable {
     
     // create Entity from properties 
     public List<Idea> getAllIdeas() {
-        allIdeas = ideaService.getAllIdeas();
+        allIdeas = ideaService.getAllAvailableIdeas();
         return allIdeas;
     }
 

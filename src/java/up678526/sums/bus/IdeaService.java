@@ -33,11 +33,12 @@ public class IdeaService {
     }
 
     public void addIdea(Idea idea) {
+        idea.setAssigned(Boolean.FALSE);
         ideaFacade.create(idea);
     }
  
-    public List<Idea> getAllIdeas() {
-        return ideaFacade.findAll();
+    public List<Idea> getAllAvailableIdeas() {
+        return ideaFacade.findAllUnassignedIdeas();
     }
 
     public Idea update(Idea idea) {
@@ -50,6 +51,7 @@ public class IdeaService {
     
     public void assignIdeaToStudent(Idea idea, Person student){
         idea.setStudent(student);
+        idea.setAssigned(Boolean.TRUE);
         ideaFacade.edit(idea);
     }
 }

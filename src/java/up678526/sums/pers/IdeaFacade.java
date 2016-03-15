@@ -29,6 +29,14 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         super(Idea.class);
     }
     
+    public List<Idea> findAllUnassignedIdeas(){
+              List <Idea> results = em
+                .createQuery("SELECT i FROM Idea i WHERE i.assigned = :assigned", Idea.class)
+                .setParameter("assigned", Boolean.FALSE)
+                .getResultList(); 
+        return results;  
+    }
+    
     public List<Idea> findIdeasByOwner(Person person){
         List <Idea> results = em
                 .createQuery("SELECT i FROM Idea i WHERE i.owner.id = :id", Idea.class)

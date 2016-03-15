@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Idea implements Serializable {
     @ManyToOne
     private Person owner; 
     
+    @OneToOne
     private Person student;
     
     private Boolean assigned;
@@ -83,7 +85,6 @@ public class Idea implements Serializable {
         this.student = student;
     }
 
-    
     public Boolean getAssigned() {
         return assigned;
     }
