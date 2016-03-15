@@ -15,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import up678526.sums.bus.IdeaService;
 import up678526.sums.bus.PersonService;
 import up678526.sums.bus.exception.AuthenticationException;
 import up678526.sums.ents.Idea;
@@ -40,10 +41,13 @@ public class PersonBean implements Serializable {
     private String password;
     private String type;
     private Organisation organisation;
-
+    
     @EJB
     private PersonService personService;
 
+    @EJB
+    private IdeaService ideaService;
+    
     public Person getCurrent() {
         return current;
     }
@@ -111,7 +115,11 @@ public class PersonBean implements Serializable {
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }
-     
+
+    public List<Idea> getUserIdeas() {
+        return personService.getOwnedIdeas(current);
+    }
+    
     public String register() {
 
         Person user = new Person();

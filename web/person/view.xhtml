@@ -40,7 +40,7 @@
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
                         <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
 
-                        <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
+                        <b:dataTable value="#{personBean.ownedIdeas}" var="idea">
 
                             <b:column>
                                 <!-- column header -->
