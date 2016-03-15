@@ -54,6 +54,7 @@ public class OrganisationBean implements Serializable {
         this.departmentActivities = departmentActivities;
     }
     
+    
     /**
      * Add a new organisation
      *
@@ -67,5 +68,4 @@ public class OrganisationBean implements Serializable {
         organisationService.createOrganisation(organisation);
         return "/organisation/view?faces-redirect=true";
     }  
-       
 }

@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import up678526.sums.bus.exception.AuthenticationException;
 import up678526.sums.ents.Idea;
+import up678526.sums.ents.Organisation;
 import up678526.sums.ents.Person;
 import up678526.sums.pers.IdeaFacade;
 import up678526.sums.pers.PersonFacade;
@@ -51,5 +52,10 @@ public class PersonService {
 
     public List<Idea> getOwnedIdeas(Person person) {
         return ideaFacade.findIdeasByOwner(person);
+    }
+    
+    public void assignOrganisation(Person person, Organisation organisation){
+        person.setOrganisation(organisation);
+        personFacade.edit(person);
     }
 }

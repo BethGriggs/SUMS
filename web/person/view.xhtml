@@ -22,51 +22,52 @@
                         <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
                         <h:outputText value="Organisation:"></h:outputText>
                         <h:form>
+                            <h:outputText value="#{personBean.current.organisation.name}"></h:outputText>
+                            <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#{personBean.organisation}">
+                                <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
+                            </b:selectOneMenu> 
+                            <b:commandButton action="#{personBean.assignOrganisation()}" rendered="#{personBean.current.organisation == null}" look="success" value="Select"></b:commandButton>
+                            <b:button rendered="#{personBean.current.organisation == null}" outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>
                             
-                            <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#">
-                            <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
-                        </b:selectOneMenu> 
-                            <b:commandButton look="success" value="Select"></b:commandButton>
-                            <b:button outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>
                         </h:form>
                     </h:panelGrid>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STUDENT')}">
                         <h1>Assigned Idea</h1>
-                        
+
                     </c:if>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
-                    <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
+                        <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
 
-                    <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
+                        <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
 
-                        <b:column>
-                            <!-- column header -->
-                            <f:facet name="header">Idea Title</f:facet>
-                            <!-- row record -->
-                            #{idea.title} 
-                        </b:column>
+                            <b:column>
+                                <!-- column header -->
+                                <f:facet name="header">Idea Title</f:facet>
+                                <!-- row record -->
+                                #{idea.title} 
+                            </b:column>
 
-                        <b:column>
-                            <f:facet name="header">Description</f:facet>
-                                #{idea.description}
-                        </b:column> 
-                        
-                        <b:column>
-                            <f:facet name="header">Tags</f:facet>
-                                #{idea.tags}
-                        </b:column> 
-                      
-                        
-                        <b:column>
-                            <f:facet name="header">Edit</f:facet>
-                            <h:link  value="" outcome="/idea/edit">
-                                <i class="fa fa-edit fa-2x"></i>
-                                <f:param name="id" value="#{idea.id}"/>
-                            </h:link>
-                        </b:column> 
-                    </b:dataTable>
+                            <b:column>
+                                <f:facet name="header">Description</f:facet>
+                                    #{idea.description}
+                            </b:column> 
+
+                            <b:column>
+                                <f:facet name="header">Tags</f:facet>
+                                    #{idea.tags}
+                            </b:column> 
+
+
+                            <b:column>
+                                <f:facet name="header">Edit</f:facet>
+                                <h:link  value="" outcome="/idea/edit">
+                                    <i class="fa fa-edit fa-2x"></i>
+                                    <f:param name="id" value="#{idea.id}"/>
+                                </h:link>
+                            </b:column> 
+                        </b:dataTable>
                     </c:if>
                 </b:column>
             </b:row>

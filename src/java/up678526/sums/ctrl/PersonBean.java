@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import up678526.sums.bus.PersonService;
 import up678526.sums.bus.exception.AuthenticationException;
 import up678526.sums.ents.Idea;
+import up678526.sums.ents.Organisation;
 import up678526.sums.ents.Person;
 
 /**
@@ -38,6 +39,7 @@ public class PersonBean implements Serializable {
     private String email;
     private String password;
     private String type;
+    private Organisation organisation;
 
     @EJB
     private PersonService personService;
@@ -102,6 +104,14 @@ public class PersonBean implements Serializable {
         return personService.getOwnedIdeas(current);
     }
 
+    public Organisation getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(Organisation organisation) {
+        this.organisation = organisation;
+    }
+     
     public String register() {
 
         Person user = new Person();
@@ -144,5 +154,10 @@ public class PersonBean implements Serializable {
         externalContext.invalidateSession();
         current = null;
         return "/index?faces-redirect=true";
+    }
+    
+    public String assignOrganisation(){
+       personService.assignOrganisation(current, organisation);
+       return "/person/view?faces-redirect=true";
     }
 }
