@@ -14,24 +14,25 @@
     </f:metadata>
     <ui:define name="title">#{ideaBean.idea.title}</ui:define>
     <ui:define name="content">
-        <b:container>
-            <b:row>
-                <b:column>
-                    <h1>View an Idea</h1>
-                    <h:form> 
-                        <h:panelGrid columns="1" cellpadding="5"> 
-                            <h:outputText value="Title: #{ideaBean.idea.title}"/>
-                            <h:outputText value="Description: #{ideaBean.idea.description}"/>
-                            <h:outputText value="Tags: #{ideaBean.idea.tags}"/>
-                        </h:panelGrid>
+        <b:row>
+            <b:column class="centered-text">
+                <b:panel>
+                    <h1>#{ideaBean.idea.title} </h1>
 
+                    <h:form> 
+                        <b:panelGrid columns="4,8">
+                            <h:outputText value="Description:"/>
+                            <h:outputText value="#{ideaBean.idea.description}"/>
+                            <h:outputText value="Tags:"/>
+                            <h:outputText value="#{ideaBean.idea.tags}"/>
+                        </b:panelGrid>
 
                         <b:commandButton action="#{ideaBean.assignIdea()}" rendered="#{personBean.currentUserType == 'STUDENT' and !ideaBean.idea.assigned}" value="Select Idea">
                             <f:ajax execute="@form" render="@form"/>
                         </b:commandButton>
                     </h:form>
-                </b:column>
-            </b:row>
-        </b:container>
+                </b:panel>
+            </b:column>
+        </b:row>
     </ui:define>
 </ui:composition>
