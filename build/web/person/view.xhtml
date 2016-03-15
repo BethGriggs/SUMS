@@ -20,8 +20,8 @@
                         <h:outputText value="#{personBean.currentUserEmail}"></h:outputText>
                         <h:outputText value="Type:"></h:outputText>
                         <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
-                        <h:outputText value="Organisation:"></h:outputText>
-                        <h:form>
+                        <h:outputText rendered="#{personBean.currentUserType == 'STAFF'}" value="Organisation:"></h:outputText>
+                        <h:form rendered="#{personBean.currentUserType == 'STAFF'}">
                             <h:outputText value="#{personBean.current.organisation.name}"></h:outputText>
                             <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#{personBean.organisation}">
                                 <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
