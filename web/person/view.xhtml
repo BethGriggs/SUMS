@@ -43,9 +43,7 @@
                         <b:dataTable value="#{personBean.ownedIdeas}" var="idea">
 
                             <b:column>
-                                <!-- column header -->
                                 <f:facet name="header">Idea Title</f:facet>
-                                <!-- row record -->
                                 #{idea.title} 
                             </b:column>
 
@@ -57,7 +55,13 @@
                             <b:column>
                                 <f:facet name="header">Tags</f:facet>
                                     #{idea.tags}
-                            </b:column> 
+                            </b:column>
+                            
+                            <b:column>
+                                <f:facet name="header">Assigned</f:facet>
+                                <h:outputText rendered="#{idea.assigned}" value="#{idea.student.email}"></h:outputText>
+                            </b:column>
+                            
 
 
                             <b:column>
