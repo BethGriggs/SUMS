@@ -22,10 +22,12 @@
                         <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
                         <h:outputText value="Organisation:"></h:outputText>
                         <h:form>
-                        <h:selectOneMenu value="#">
+                            
+                            <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#">
                             <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
-                        </h:selectOneMenu> 
-                            <b:commandButton look="primary" value=" Add organisation"></b:commandButton>
+                        </b:selectOneMenu> 
+                            <b:commandButton look="success" value="Select"></b:commandButton>
+                            <b:button outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>
                         </h:form>
                     </h:panelGrid>
 
