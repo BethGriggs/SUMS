@@ -15,7 +15,7 @@
                 <b:column>
                     <h1>Your Account</h1>
 
-                    <h:panelGrid columns="2" class="table table-striped">
+                    <b:panelGrid columns="4,8">
                         <h:outputText value="Email:"></h:outputText>
                         <h:outputText value="#{personBean.currentUserEmail}"></h:outputText>
                         <h:outputText value="Type:"></h:outputText>
@@ -30,7 +30,7 @@
                             <b:button rendered="#{personBean.current.organisation == null}" outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>
                             
                         </h:form>
-                    </h:panelGrid>
+                    </b:panelGrid>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STUDENT')}">
                         <h1>Assigned Idea</h1>
