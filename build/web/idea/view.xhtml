@@ -25,6 +25,12 @@
                             <h:outputText value="#{ideaBean.idea.description}"/>
                             <h:outputText value="Tags:"/>
                             <h:outputText value="#{ideaBean.idea.tags}"/>
+                            <h:outputText value="Submitted By:"></h:outputText>
+                            <h:outputText value="#{ideaBean.idea.owner.email}"/>
+                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="Organisation:"/>
+                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.name}"/>
+                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="Department Activities:"/>
+                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.departmentActivities}"/>
                         </b:panelGrid>
 
                         <b:commandButton ajax="true" action="#{ideaBean.assignIdea()}" rendered="#{personBean.currentUserType == 'STUDENT' and !ideaBean.idea.assigned and personBean.assignedIdea == null}" value="Select Idea" look="success" class="pull-right">
