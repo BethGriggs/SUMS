@@ -159,7 +159,7 @@ public class PersonBean implements Serializable {
     /**
      * Attempt login
      *
-     * @return
+     * @return index page
      */
     public String login() {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
