@@ -41,7 +41,7 @@
                             <h:outputText value="Description:"/>
                             <h:outputText value="#{personBean.assignedIdea.description}"/>
                             <h:outputText value=""></h:outputText>
-                            <b:commandButton  action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
+                            <b:commandButton ajax="true" update="@form" action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
                         </b:commandButton>
                         </b:panelGrid>
 
