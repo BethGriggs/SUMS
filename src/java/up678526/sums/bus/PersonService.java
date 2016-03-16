@@ -25,6 +25,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import up678526.sums.bus.exception.AuthenticationException;
+import up678526.sums.bus.exception.BusinessException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Organisation;
 import up678526.sums.ents.Person;
@@ -62,8 +63,13 @@ public class PersonService {
         }
     }
 
-    public void createNewUser(Person person) {
-        personFacade.create(person);
+    public void createNewUser(Person person) throws BusinessException {
+        if (personFacade.findUserByEmail(person.getEmail()).isEmpty()){
+            personFacade.create(person);
+        }
+        else {
+            throw new BusinessException("User with this email already exists.");
+        }
     }
 
     public List<Idea> getOwnedIdeas(Person person) {
@@ -76,8 +82,7 @@ public class PersonService {
     }
     
     public List<Idea> getAssignedIdea(Person person){
-       
-        return ideaFacade.findUserAssignedIdea(person);
+       return ideaFacade.findUserAssignedIdea(person);
     }
     
 }

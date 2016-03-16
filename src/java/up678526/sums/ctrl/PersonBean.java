@@ -34,6 +34,7 @@ import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
 import up678526.sums.bus.PersonService;
 import up678526.sums.bus.exception.AuthenticationException;
+import up678526.sums.bus.exception.BusinessException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Organisation;
 import up678526.sums.ents.Person;
@@ -144,8 +145,15 @@ public class PersonBean implements Serializable {
         user.setEmail(this.email);
         user.setType(this.type.toUpperCase());
 
-        personService.createNewUser(user);
-        return "/login?faces-redirect=true";
+        try {
+            personService.createNewUser(user);
+            return "/login?faces-redirect=true";
+
+        } catch (BusinessException ex) {
+            Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage("registrationError", new FacesMessage("Failed to register: ", ex.getMessage()));
+            return "";
+        }
     }
 
     /**
