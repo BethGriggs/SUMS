@@ -29,7 +29,7 @@ import up678526.sums.ents.Person;
 import up678526.sums.pers.IdeaFacade;
 
 /**
- *
+ * provides idea related functionality, including CRUD operations
  * @author up678526
  */
 @Stateless
@@ -41,33 +41,71 @@ public class IdeaService {
     @EJB
     private IdeaFacade ideaFacade;
 
+    /**
+     * returns idea with the specified id
+     *
+     * @param id
+     * @return idea object
+     */
     public Idea getIdea(Long id) {
         return ideaFacade.find(id);
     }
 
+    /**
+     * adds the specified idea to the database
+     *
+     * @param idea
+     */
     public void addIdea(Idea idea) {
         idea.setAssigned(Boolean.FALSE);
         ideaFacade.create(idea);
     }
 
+    /**
+     * returns the list of all available ideas
+     *
+     * @return list<
+     */
     public List<Idea> getAllAvailableIdeas() {
         return ideaFacade.findAllUnassignedIdeas();
     }
 
+    /**
+     * updates the specified idea
+     *
+     * @param idea
+     * @return updated idea object
+     */
     public Idea update(Idea idea) {
         return ideaFacade.edit(idea);
     }
 
+    /**
+     * removes the specified idea
+     *
+     * @param idea
+     */
     public void remove(Idea idea) {
         ideaFacade.remove(idea);
     }
 
+    /**
+     * assigns an idea to a student
+     *
+     * @param idea
+     * @param student
+     */
     public void assignIdeaToStudent(Idea idea, Person student) {
         idea.setStudent(student);
         idea.setAssigned(Boolean.TRUE);
         ideaFacade.edit(idea);
     }
 
+    /**
+     * removes the idea from the a student; sets the idea to unassigned
+     *
+     * @param idea
+     */
     public void deselectIdea(Idea idea) {
         idea.setAssigned(Boolean.FALSE);
         idea.setStudent(null);

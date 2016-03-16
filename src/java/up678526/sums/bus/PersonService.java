@@ -33,6 +33,8 @@ import up678526.sums.pers.IdeaFacade;
 import up678526.sums.pers.PersonFacade;
 
 /**
+ * provides user focused functionality including user creation, validation of
+ * user credentials. Also, provides functionality for users to select ideas.
  *
  * @author up678526
  */
@@ -48,41 +50,73 @@ public class PersonService {
     @EJB
     private IdeaFacade ideaFacade;
 
+    /**
+     * validates a users email and password
+     *
+     * @param email
+     * @param password
+     * @return user if credentials were correct, otherwise null
+     * @throws AuthenticationException
+     */
     public Person validateCredentials(String email, String password) throws AuthenticationException {
         List<Person> persons = personFacade.findUserByEmail(email);
+        // if there is no person matching this email, throw AuthenticationException
         if (persons.isEmpty()) {
-            throw new AuthenticationException("Invalid username or password.");
+            throw new AuthenticationException("Invalid email or password.");
         } else {
+            // should only be one person with this email, therefore retrieve first one
             Person person = persons.get(0);
             if (person.getEmail().equals(email) && person.getPassword().equals(password)) {
                 return person;
             } else {
-                // in report write about why this error message is this!!
-                throw new AuthenticationException("Invalid username or password.");
+                // throw AuthenticationException if email and password do not match
+                throw new AuthenticationException("Invalid email or password.");
             }
         }
     }
 
+    /**
+     * creates a new user
+     *
+     * @param person
+     * @throws BusinessException
+     */
     public void createNewUser(Person person) throws BusinessException {
-        if (personFacade.findUserByEmail(person.getEmail()).isEmpty()){
+        if (personFacade.findUserByEmail(person.getEmail()).isEmpty()) {
             personFacade.create(person);
-        }
-        else {
+        } else {
             throw new BusinessException("User with this email already exists.");
         }
     }
 
+    /**
+     * returns the list of ideas that this staff member has created
+     *
+     * @param person
+     * @return list of ideas owned by the specified user
+     */
     public List<Idea> getOwnedIdeas(Person person) {
         return ideaFacade.findIdeasByOwner(person);
     }
-    
-    public void assignOrganisation(Person person, Organisation organisation){
+
+    /**
+     * assigns a user to an organisation
+     *
+     * @param person
+     * @param organisation
+     */
+    public void assignOrganisation(Person person, Organisation organisation) {
         person.setOrganisation(organisation);
         personFacade.edit(person);
     }
-    
-    public List<Idea> getAssignedIdea(Person person){
-       return ideaFacade.findUserAssignedIdea(person);
+
+    /**
+     * returns the idea a student has been assigned
+     *
+     * @param person
+     * @return the users assigned idea, otherwise null
+     */
+    public List<Idea> getAssignedIdea(Person person) {
+        return ideaFacade.findUserAssignedIdea(person);
     }
-    
 }

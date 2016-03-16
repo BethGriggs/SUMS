@@ -29,7 +29,6 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
 import up678526.sums.bus.PersonService;
@@ -40,6 +39,7 @@ import up678526.sums.ents.Organisation;
 import up678526.sums.ents.Person;
 
 /**
+ * controller for user management
  *
  * @author up678526
  */
@@ -58,23 +58,116 @@ public class PersonBean implements Serializable {
     private String password;
     private String type;
     private Organisation organisation;
-    
+
     @EJB
     private PersonService personService;
 
     @EJB
     private IdeaService ideaService;
-    
+
+    /**
+     * creates a new user, checks if email is already in use
+     *
+     * @return login view if successful, current view if unsuccessful
+     */
+    public String register() {
+
+        // create the new user
+        Person user = new Person();
+        user.setPassword(this.password);
+        user.setEmail(this.email);
+        user.setType(this.type.toUpperCase());
+
+        try {
+            personService.createNewUser(user);
+            return "/login?faces-redirect=true";
+
+        } catch (BusinessException ex) {
+            // catches exception and provides error message if email is already in use
+            FacesContext.getCurrentInstance().addMessage("registrationError", new FacesMessage("Failed to register: ", ex.getMessage()));
+            return "";
+        }
+    }
+
+    /**
+     * attempt login, set current context if successful
+     *
+     * @return index page if successful, login page if unsuccessful
+     */
+    public String login() {
+        try {
+            // validate user credentials
+            current = personService.validateCredentials(email, password);
+        } catch (AuthenticationException ex) {
+            // catch login failure
+            getCurrentInstance().addMessage("loginError", new FacesMessage("Failed to login: ", ex.getMessage()));
+            Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if (current != null) {
+            // put the current user to the session map
+            getCurrentInstance().getExternalContext().getSessionMap().put("user", current);
+        } else {
+            return "";
+        }
+
+        return "/index?faces-redirect=true";
+    }
+
+    /**
+     * logs the user out, invalidates session
+     *
+     * @return
+     */
+    public String logout() {
+        getCurrentInstance().getExternalContext().getSessionMap().remove("user");
+        getCurrentInstance().getExternalContext().invalidateSession();
+        current = null;
+        return "/index?faces-redirect=true";
+    }
+
+    /**
+     * assigns the user to an organisation
+     *
+     * @return
+     */
+    public String assignOrganisation() {
+        personService.assignOrganisation(current, organisation);
+        return "/person/view?faces-redirect=true";
+    }
+
+    /**
+     * obtains the users assigned idea
+     *
+     * @return
+     */
+    public Idea getAssignedIdea() {
+        if (personService.getAssignedIdea(current).isEmpty()) {
+            return null;
+        } else {
+            return personService.getAssignedIdea(current).get(0);
+        }
+    }
+
+    /**
+     * allows the user to deselect their current idea
+     *
+     * @return
+     */
+    public String deselectIdea() {
+        if (getAssignedIdea() != null) {
+            ideaService.deselectIdea(getAssignedIdea());
+        }
+        return "/person/view?faces-redirect=true";
+    }
+
+    /* getters and setters */
     public Person getCurrent() {
         return current;
     }
 
     public void setCurrent(Person current) {
         this.current = current;
-    }
-
-    public PersonService getService() {
-        return this.personService;
     }
 
     public String getEmail() {
@@ -91,14 +184,6 @@ public class PersonBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public PersonService getPersonService() {
-        return personService;
-    }
-
-    public void setPersonService(PersonService personService) {
-        this.personService = personService;
     }
 
     public String getType() {
@@ -121,10 +206,6 @@ public class PersonBean implements Serializable {
         }
     }
 
-    public List<Idea> getOwnedIdeas() {
-        return personService.getOwnedIdeas(current);
-    }
-
     public Organisation getOrganisation() {
         return organisation;
     }
@@ -133,79 +214,23 @@ public class PersonBean implements Serializable {
         this.organisation = organisation;
     }
 
-    public List<Idea> getUserIdeas() {
+    public List<Idea> getOwnedIdeas() {
         return personService.getOwnedIdeas(current);
-    }
-    
-    public String register() {
-
-        Person user = new Person();
-
-        user.setPassword(this.password);
-        user.setEmail(this.email);
-        user.setType(this.type.toUpperCase());
-
-        try {
-            personService.createNewUser(user);
-            return "/login?faces-redirect=true";
-
-        } catch (BusinessException ex) {
-            Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage("registrationError", new FacesMessage("Failed to register: ", ex.getMessage()));
-            return "";
-        }
     }
 
     /**
-     * Attempt login
      *
-     * @return index page
+     * @return list of all ideas created by the user
      */
-    public String login() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        try {
-            //validate user credentials
-            current = personService.validateCredentials(email, password);
-        } catch (AuthenticationException ex) {
-            FacesContext.getCurrentInstance().addMessage("loginError", new FacesMessage("Failed to login: ", ex.getMessage()));
-            Logger.getLogger(PersonBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        if (current != null) {
-            externalContext.getSessionMap().put("user", current);
-        } else {
-            return null;
-        }
-
-        return "/index?faces-redirect=true";
+    public List<Idea> getUserIdeas() {
+        return personService.getOwnedIdeas(current);
     }
 
-    public String logout() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.getSessionMap().remove("user");
-        externalContext.invalidateSession();
-        current = null;
-        return "/index?faces-redirect=true";
-    }
-    
-    public String assignOrganisation(){
-       personService.assignOrganisation(current, organisation);
-       return "/person/view?faces-redirect=true";
-    }
-    
-    public Idea getAssignedIdea(){
-        if (personService.getAssignedIdea(current).isEmpty()){
-            return null;
-        }
-        else {
-            return personService.getAssignedIdea(current).get(0);
-         }
-    }
-    
-    public String deselectIdea(){
-        if (getAssignedIdea() != null){
-       ideaService.deselectIdea(getAssignedIdea());
-        }
-       return "/person/view?faces-redirect=true";
+    /**
+     *
+     * @return current instance
+     */
+    public FacesContext getCurrentInstance() {
+        return FacesContext.getCurrentInstance();
     }
 }

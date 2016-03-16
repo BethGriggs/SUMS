@@ -28,15 +28,14 @@ package up678526.sums.bus.exception;
 public class AuthorisationException extends Exception {
 
     /**
-     * Creates a new instance of <code>AuthorisationException</code> without
-     * detail message.
+     * Creates a new instance of AuthorisationException
      */
     public AuthorisationException() {
     }
 
     /**
-     * Constructs an instance of <code>AuthorisationException</code> with the
-     * specified detail message.
+     * Constructs an instance of AuthorisationException with the specified
+     * detail message.
      *
      * @param msg the detail message.
      */

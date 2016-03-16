@@ -28,7 +28,7 @@ import up678526.sums.ents.Organisation;
 import up678526.sums.pers.OrganisationFacade;
 
 /**
- *
+ * provides functionality to create and retrieve organisations 
  * @author up678526
  */
 @Stateless
@@ -36,13 +36,20 @@ public class OrganisationService {
 
     @EJB
     private OrganisationFacade organisationFacade;
-    
+
+    /**
+     * creates a new organisation
+     * 
+     * @param organisation
+     */
     public void createOrganisation(Organisation organisation) {
         organisationFacade.create(organisation);
     }
-    
-    public List<Organisation> getOrganisations(){
+
+    /**
+     * @return list of all organisations
+     */
+    public List<Organisation> getOrganisations() {
         return organisationFacade.findAll();
     }
-
 }

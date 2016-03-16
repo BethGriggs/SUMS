@@ -25,20 +25,19 @@ package up678526.sums.bus.exception;
 
 /**
  *
- * @author beth
+ * @author up678526
  */
 public class BusinessException extends Exception {
 
     /**
-     * Creates a new instance of <code>BusinessException</code> without detail
-     * message.
+     * Creates a new instance of BusinessException
      */
     public BusinessException() {
     }
 
     /**
-     * Constructs an instance of <code>BusinessException</code> with the
-     * specified detail message.
+     * Constructs an instance of BusinessException with the specified detail
+     * message.
      *
      * @param msg the detail message.
      */

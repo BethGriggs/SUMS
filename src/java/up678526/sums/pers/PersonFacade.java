@@ -28,7 +28,7 @@ import javax.persistence.PersistenceContext;
 import up678526.sums.ents.Person;
 
 /**
- *
+ * facade class for interacting with person entities
  * @author up678526
  */
 @Stateless

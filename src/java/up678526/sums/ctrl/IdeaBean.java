@@ -30,11 +30,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
-import up678526.sums.bus.PersonService;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
 /**
+ * controller providing idea CRUD functionality 
  *
  * @author up678526
  */
@@ -47,22 +47,91 @@ public class IdeaBean implements Serializable {
      */
     public IdeaBean() {
     }
-   
-    @ManagedProperty(value="#{param.id}")
+
+    @ManagedProperty(value = "#{param.id}")
     private String selectedId;
     private Idea idea = null;
     private String title;
     private String description;
     private String tags;
-    
+
     @EJB
     private IdeaService ideaService;
 
-    @EJB
-    private PersonService personService;
-    
     private List<Idea> allIdeas;
+
+    /**
+     * adds a new idea to the database
+     * 
+     * @return index view
+     */
+    public String create() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Person currentUser = (Person) externalContext.getSessionMap().get("user");
+
+        Idea newIdea = new Idea();
+
+        newIdea.setTitle(this.title);
+        newIdea.setDescription(this.description);
+        newIdea.setTags(this.tags);
+        newIdea.setOwner(currentUser);
+        ideaService.addIdea(newIdea);
+
+        return "/index?faces-redirect=true";
+    }
+
+    /**
+     * updated the current idea
+     * @return
+     */
+    public String update() {
+        ideaService.update(idea);
+        return "/idea/view?faces-redirect=true";
+    }
+
+    /**
+     * deletes the current idea
+     * @return
+     */
+    public String delete() {
+        ideaService.remove(idea);
+        return "/index";
+    }
+
+    /**
+     * retrieves the idea based on managed property selectedId
+     */
+    public void retrieve() {
+        idea = ideaService.getIdea(Long.parseLong(selectedId));
+    }
+
+    /**
+     * assigns the idea to the current (student) user
+     */
+    public void assignIdea() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        Person currentUser = (Person) externalContext.getSessionMap().get("user");
+
+        ideaService.assignIdeaToStudent(idea, currentUser);
+    }
     
+    /* getters and setters */
+    public String getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(String selectedId) {
+        this.selectedId = selectedId;
+    }
+
+    public Idea getIdea() {
+        return idea;
+    }
+
+    public void setIdea(Idea idea) {
+        this.idea = idea;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -74,103 +143,29 @@ public class IdeaBean implements Serializable {
     public String getDescription() {
         return description;
     }
-    
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public IdeaService getService() {
-        return this.ideaService;
-    }
-    
-    // create Entity from properties 
-    public List<Idea> getAllIdeas() {
-        allIdeas = ideaService.getAllAvailableIdeas();
-        return allIdeas;
-    }
-
-    public String getSelectedId() {
-        return selectedId;
-    }
-
-    public void setSelectedId(String selectedId) {
-        this.selectedId = selectedId;
-    }
-    
-    
     public String getTags() {
         return tags;
     }
 
     public void setTags(String tags) {
         this.tags = tags;
-    }   
-
-    public Idea getIdea() {
-        return idea;
     }
 
-    public void setIdea(Idea idea) {
-        this.idea = idea;
-    } 
+    public IdeaService getService() {
+        return this.ideaService;
+    }
 
     /**
-     * Add a new idea to the database
      *
-     * @return 
+     * @return list all available ideas
      */
-    public String create() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Person currentUser = (Person)externalContext.getSessionMap().get("user");
-        
-        Idea newIdea = new Idea();
-
-        newIdea.setTitle(this.title);
-        newIdea.setDescription(this.description);
-        newIdea.setTags(this.tags);
-        newIdea.setOwner(currentUser);
-        ideaService.addIdea(newIdea);
-
-        return "/index?faces-redirect=true";
-    }  
-    
-    public String update(){
-       // check who it is owned by maybe? 
-       ideaService.update(idea);
-       return "/idea/view?faces-redirect=true";
+    public List<Idea> getAllIdeas() {
+        allIdeas = ideaService.getAllAvailableIdeas();
+        return allIdeas;
     }
-    
-    public String delete(){
-        ideaService.remove(idea);
-        return "/index";
-    }
-                
-    public String prepareView(){
-        idea = ideaService.getIdea(Long.parseLong(selectedId));
-        
-        if(idea != null){
-        return "/idea/view?faces-redirect=true";
-        }
-        else{
-            return "";
-        }
-    }
-    
-    public String prepareEdit(){
-      if (idea != null){
-          return "/idea/edit?faces-redirect=true";
-      }
-        return "";
-    }
-    
-    public void retrieve(){
-       idea = ideaService.getIdea(Long.parseLong(selectedId));
-    }
-
-    public void assignIdea(){
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Person currentUser = (Person)externalContext.getSessionMap().get("user");
-        
-        ideaService.assignIdeaToStudent(idea, currentUser);
-    } 
 }

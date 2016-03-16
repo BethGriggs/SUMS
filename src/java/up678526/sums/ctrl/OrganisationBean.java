@@ -30,7 +30,7 @@ import up678526.sums.bus.OrganisationService;
 import up678526.sums.ents.Organisation;
 
 /**
- *
+ * Controller for creating and assigning organisations 
  * @author up678526
  */
 @Named(value = "organisationBean")
@@ -39,8 +39,7 @@ public class OrganisationBean implements Serializable {
 
     private String name;
     private String departmentActivities;
-    
-    
+   
     @EJB
     private OrganisationService organisationService;
     
@@ -50,10 +49,30 @@ public class OrganisationBean implements Serializable {
     public OrganisationBean() {
     }
 
+    /**
+     *
+     * @return list of organisations
+     */
     public List<Organisation> getOrganisations() {
         return organisationService.getOrganisations();
     }
-
+        
+    /**
+     * Add a new organisation
+     *
+     * @return 
+     */
+    public String create() {
+ 
+        Organisation organisation = new Organisation();
+        organisation.setName(this.name);
+        organisation.setDepartmentActivities(this.departmentActivities);
+        organisationService.createOrganisation(organisation);
+        return "/person/view?faces-redirect=true";
+    } 
+    
+    /* getters and setters */ 
+    
     public String getName() {
         return name;
     }
@@ -68,20 +87,5 @@ public class OrganisationBean implements Serializable {
 
     public void setDepartmentActivities(String departmentActivities) {
         this.departmentActivities = departmentActivities;
-    }
-    
-    
-    /**
-     * Add a new organisation
-     *
-     * @return 
-     */
-    public String create() {
- 
-        Organisation organisation = new Organisation();
-        organisation.setName(this.name);
-        organisation.setDepartmentActivities(this.departmentActivities);
-        organisationService.createOrganisation(organisation);
-        return "/person/view?faces-redirect=true";
-    }  
+    } 
 }

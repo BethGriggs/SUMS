@@ -29,7 +29,7 @@ import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
 /**
- *
+ * facade class for interacting with idea entities
  * @author up678526
  */
 @Stateless

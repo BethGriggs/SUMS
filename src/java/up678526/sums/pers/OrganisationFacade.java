@@ -27,7 +27,7 @@ import javax.persistence.PersistenceContext;
 import up678526.sums.ents.Organisation;
 
 /**
- *
+ * facade class for interacting with organisation entities
  * @author up678526
  */
 @Stateless
