@@ -44,4 +44,12 @@ public class IdeaFacade extends AbstractFacade<Idea> {
                 .getResultList(); 
         return results;  
     }
+    
+    public List<Idea> findUserAssignedIdea(Person student){
+        List <Idea> results = em
+                .createQuery("SELECT i FROM Idea i WHERE i.student.id = :id", Idea.class)
+                .setParameter("id", student.getId())
+                .getResultList();
+        return results;
+    }
 }

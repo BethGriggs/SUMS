@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
+import up678526.sums.bus.PersonService;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
@@ -41,6 +42,9 @@ public class IdeaBean implements Serializable {
     @EJB
     private IdeaService ideaService;
 
+    @EJB
+    private PersonService personService;
+    
     private List<Idea> allIdeas;
     
     public String getTitle() {
@@ -153,5 +157,4 @@ public class IdeaBean implements Serializable {
         
         ideaService.assignIdeaToStudent(idea, currentUser);
     } 
-
 }

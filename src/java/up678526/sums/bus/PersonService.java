@@ -58,4 +58,9 @@ public class PersonService {
         person.setOrganisation(organisation);
         personFacade.edit(person);
     }
+    
+    public List<Idea> getAssignedIdea(Person person){
+        return ideaFacade.findUserAssignedIdea(person);
+    }
+    
 }

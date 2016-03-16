@@ -54,4 +54,10 @@ public class IdeaService {
         idea.setAssigned(Boolean.TRUE);
         ideaFacade.edit(idea);
     }
+    
+    public void deselectIdea(Idea idea){
+       idea.setAssigned(Boolean.FALSE);
+       idea.setStudent(null);
+       ideaFacade.edit(idea);
+    }
 }

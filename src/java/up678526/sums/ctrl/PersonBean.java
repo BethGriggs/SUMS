@@ -168,4 +168,20 @@ public class PersonBean implements Serializable {
        personService.assignOrganisation(current, organisation);
        return "/person/view?faces-redirect=true";
     }
+    
+    public Idea getAssignedIdea(){
+        if (personService.getAssignedIdea(current).isEmpty()){
+            return null;
+        }
+        else {
+            return personService.getAssignedIdea(current).get(0);
+         }
+    }
+    
+    public String deselectIdea(){
+        if (getAssignedIdea() != null){
+       ideaService.deselectIdea(getAssignedIdea());
+        }
+       return "/person/view?faces-redirect=true";
+    }
 }

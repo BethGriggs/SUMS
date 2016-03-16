@@ -26,15 +26,27 @@
                             <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#{personBean.organisation}">
                                 <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
                             </b:selectOneMenu> 
-                            <b:commandButton action="#{personBean.assignOrganisation()}" rendered="#{personBean.current.organisation == null}" look="success" value="Select"></b:commandButton>
-                            <b:button rendered="#{personBean.current.organisation == null}" outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>
-                            
+                            <b:commandButton  action="#{personBean.assignOrganisation()}" rendered="#{personBean.current.organisation == null}" look="success" value="Select"></b:commandButton>
+                            <b:button rendered="#{personBean.current.organisation == null}" outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>         
                         </h:form>
                     </b:panelGrid>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STUDENT')}">
                         <h1>Assigned Idea</h1>
-                        
+                        <h:outputText rendered="#{personBean.assignedIdea == null}" value="You have not selected an idea yet."></h:outputText>
+                        <h:form rendered="#{personBean.assignedIdea != null}"> 
+                        <b:panelGrid columns="4,8">
+                            <h:outputText value="Title: "/>
+                            <h:outputText value="#{personBean.assignedIdea.title}"/>
+                            <h:outputText value="Description:"/>
+                            <h:outputText value="#{personBean.assignedIdea.description}"/>
+                            <h:outputText value=""></h:outputText>
+                            <b:commandButton  action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
+                        </b:commandButton>
+                        </b:panelGrid>
+
+                      
+                    </h:form>
                     </c:if>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
