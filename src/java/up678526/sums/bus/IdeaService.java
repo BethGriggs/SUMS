@@ -22,9 +22,6 @@ public class IdeaService {
     public IdeaService() {
     }
 
-        // more named towards what the business operation 'create', 'createIdea' 
-         // is this okay to do - business logic ... Bank account not overdrawn 
-    // mutiple facades between entities 
     @EJB
     private IdeaFacade ideaFacade;
 
@@ -36,7 +33,7 @@ public class IdeaService {
         idea.setAssigned(Boolean.FALSE);
         ideaFacade.create(idea);
     }
- 
+
     public List<Idea> getAllAvailableIdeas() {
         return ideaFacade.findAllUnassignedIdeas();
     }
@@ -48,16 +45,16 @@ public class IdeaService {
     public void remove(Idea idea) {
         ideaFacade.remove(idea);
     }
-    
-    public void assignIdeaToStudent(Idea idea, Person student){
+
+    public void assignIdeaToStudent(Idea idea, Person student) {
         idea.setStudent(student);
         idea.setAssigned(Boolean.TRUE);
         ideaFacade.edit(idea);
     }
-    
-    public void deselectIdea(Idea idea){
-       idea.setAssigned(Boolean.FALSE);
-       idea.setStudent(null);
-       ideaFacade.edit(idea);
+
+    public void deselectIdea(Idea idea) {
+        idea.setAssigned(Boolean.FALSE);
+        idea.setStudent(null);
+        ideaFacade.edit(idea);
     }
 }

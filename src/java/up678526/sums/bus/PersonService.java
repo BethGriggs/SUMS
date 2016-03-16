@@ -60,6 +60,7 @@ public class PersonService {
     }
     
     public List<Idea> getAssignedIdea(Person person){
+       
         return ideaFacade.findUserAssignedIdea(person);
     }
     
