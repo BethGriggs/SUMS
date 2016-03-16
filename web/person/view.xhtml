@@ -40,7 +40,12 @@
                             <h:outputText value="#{personBean.assignedIdea.title}"/>
                             <h:outputText value="Description:"/>
                             <h:outputText value="#{personBean.assignedIdea.description}"/>
-                            <h:outputText value=""></h:outputText>
+                            <h:outputText value="Submitted By:"></h:outputText>
+                            <h:outputText value="#{personBean.assignedIdea.owner.email}"/>
+                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="Organisation:"/>
+                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.name}"/>
+                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="Department Activities:"/>
+                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.departmentActivities}"/>
                             <b:commandButton ajax="true" update="@form" action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
                         </b:commandButton>
                         </b:panelGrid>
