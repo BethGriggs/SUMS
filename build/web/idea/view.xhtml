@@ -20,16 +20,16 @@
                     <h1>#{ideaBean.idea.title} </h1>
                     <h:form> 
                         <b:panelGrid columns="4,8">
-                            <h:outputText value="Description:"/>
-                            <h:outputText value="#{ideaBean.idea.description}"/>
-                            <h:outputText value="Tags:"/>
-                            <h:outputText value="#{ideaBean.idea.tags}"/>
-                            <h:outputText value="Submitted By:"></h:outputText>
-                            <h:outputText value="#{ideaBean.idea.owner.email}"/>
-                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="Organisation:"/>
-                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.name}"/>
-                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="Department Activities:"/>
-                            <h:outputText rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.departmentActivities}"/>
+                            <b:label text="Description:"/>
+                            <b:inputTextarea readonly="true" value="#{ideaBean.idea.description}"/>
+                            <b:label text="Tags:"/>
+                            <b:inputText readonly="true" value="#{ideaBean.idea.tags}"/>
+                            <b:label text="Submitted By:"/>
+                            <b:inputText readonly="true" value="#{ideaBean.idea.owner.email}"/>
+                            <b:label rendered="#{ideaBean.idea.owner.organisation != null}" text="Organisation:"/>
+                            <b:inputText readonly="true" rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.name}"/>
+                            <b:label rendered="#{ideaBean.idea.owner.organisation != null}" text="Department Activities:"/>
+                            <b:inputText readonly="true" rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.departmentActivities}"/>
                         </b:panelGrid>
                         <b:commandButton ajax="true" action="#{ideaBean.assignIdea()}" rendered="#{personBean.currentUserType == 'STUDENT' and !ideaBean.idea.assigned and personBean.assignedIdea == null}" value="Select Idea" look="success" class="pull-right">
                         </b:commandButton>

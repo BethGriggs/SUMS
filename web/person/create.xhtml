@@ -15,15 +15,15 @@
                     <h1>Register</h1>
                     <h:form>
                         <b:panelGrid columns="4,8">
-                            <h:outputText value="Email:"/>
+                            <b:label text="Email:"/>
                             <b:inputText  id="email" value="#{personBean.email}" required="true" requiredMessage="Please enter a valid email." validatorMessage="Please enter a valid email.">
                                 <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                             </b:inputText>
-                            <h:outputText value="Password:"/>
+                            <b:label text="Password:"/>
                             <b:inputSecret id="password" value="#{personBean.password}" validatorMessage="Password must contain at least 6 characters.">
                                 <f:validateLength minimum="6" maximum="255" />
                             </b:inputSecret>
-                            <h:outputText value="Type:"></h:outputText>
+                            <b:label text="Type:"/>
                             <b:selectOneMenu value="#{personBean.type}">
                                 <f:selectItem itemLabel="Student" itemValue="STUDENT"/> 
                                 <f:selectItem itemLabel="Staff" itemValue="STAFF"/> 

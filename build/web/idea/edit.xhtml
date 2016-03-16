@@ -20,11 +20,11 @@
                     <h1>Edit Idea</h1>
                     <h:form>
                         <b:panelGrid columns="4,8"> 
-                            <h:outputLabel value="Title:"/>
-                            <b:inputText  id="title" value="#{ideaBean.idea.title}"></b:inputText>
-                            <h:outputLabel value="Description:"/>
+                            <b:label text="Title:"/>
+                            <b:inputTextarea  id="title" value="#{ideaBean.idea.title}"></b:inputText>
+                            <b:label text="Description:"/>
                             <b:inputTextarea id="description" value="#{ideaBean.idea.description}"></b:inputTextarea>
-                            <h:outputLabel value="Tags:"/>
+                            <b:label text="Tags:"/>
                             <b:inputText  id="tags" value="#{ideaBean.idea.tags}"></b:inputText>
                         </b:panelGrid>
                         

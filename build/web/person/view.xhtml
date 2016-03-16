@@ -15,18 +15,21 @@
                 <b:column>
                     <h1>Your Account</h1>
 
-                    <b:panelGrid columns="4,8">
-                        <h:outputText value="Email:"></h:outputText>
-                        <h:outputText value="#{personBean.currentUserEmail}"></h:outputText>
-                        <h:outputText value="Type:"></h:outputText>
-                        <h:outputText value="#{personBean.currentUserType}"></h:outputText> 
-                        <h:outputText rendered="#{personBean.currentUserType == 'STAFF'}" value="Organisation:"></h:outputText>
+                    <b:panelGrid columns="12">
+                        <h:form>
+                            <b:label text="Email:"/>
+                            <b:inputText readonly="true" value="#{personBean.currentUserEmail}"/>
+                            <b:label text="Type:"/>
+                            <b:inputText readonly="true" value="#{personBean.currentUserType}"/>
+                            <b:commandButton rendered="false" value=""></b:commandButton>
+                        </h:form>
                         <h:form rendered="#{personBean.currentUserType == 'STAFF'}">
-                            <h:outputText value="#{personBean.current.organisation.name}"></h:outputText>
+                            <b:label rendered="#{personBean.currentUserType == 'STAFF'}" text="Organisation:"/>
+                            <b:inputText readonly="true" value="#{personBean.current.organisation.name}"/>
                             <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#{personBean.organisation}">
                                 <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
                             </b:selectOneMenu> 
-                            <b:commandButton  action="#{personBean.assignOrganisation()}" rendered="#{personBean.current.organisation == null}" look="success" value="Select"></b:commandButton>
+                            <b:commandButton ajax="true" update="@form" action="#{personBean.assignOrganisation()}" rendered="#{personBean.current.organisation == null}" look="success" value="Select"></b:commandButton>
                             <b:button rendered="#{personBean.current.organisation == null}" outcome="/organisation/create" look="primary" style="margin-left: 2%;" value="Add Organisation"></b:button>         
                         </h:form>
                     </b:panelGrid>
@@ -35,23 +38,21 @@
                         <h1>Assigned Idea</h1>
                         <h:outputText rendered="#{personBean.assignedIdea == null}" value="You have not selected an idea yet."></h:outputText>
                         <h:form rendered="#{personBean.assignedIdea != null}"> 
-                        <b:panelGrid columns="4,8">
-                            <h:outputText value="Title: "/>
-                            <h:outputText value="#{personBean.assignedIdea.title}"/>
-                            <h:outputText value="Description:"/>
-                            <h:outputText value="#{personBean.assignedIdea.description}"/>
-                            <h:outputText value="Submitted By:"></h:outputText>
-                            <h:outputText value="#{personBean.assignedIdea.owner.email}"/>
-                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="Organisation:"/>
-                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.name}"/>
-                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="Department Activities:"/>
-                            <h:outputText rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.departmentActivities}"/>
-                            <b:commandButton ajax="true" update="@form" action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
-                        </b:commandButton>
-                        </b:panelGrid>
-
-                      
-                    </h:form>
+                            <b:panelGrid columns="12">
+                                <b:label text="Title: "/>
+                                <b:inputText readonly="true" value="#{personBean.assignedIdea.title}"/>
+                                <b:label text="Description:"/>
+                                <b:inputTextarea readonly="true" value="#{personBean.assignedIdea.description}"/>
+                                <b:label text="Submitted By:"/>
+                                <b:inputText readonly="true" value="#{personBean.assignedIdea.owner.email}"/>
+                                <b:label rendered="#{personBean.assignedIdea.owner.organisation != null}" text="Organisation:"/>
+                                <b:inputText readonly="true" rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.name}"/>
+                                <b:label rendered="#{personBean.assignedIdea.owner.organisation != null}" text="Department Activities:"/>
+                                <b:inputText readonly="true" rendered="#{personBean.assignedIdea.owner.organisation != null}" value="#{personBean.assignedIdea.owner.organisation.departmentActivities}"/>
+                                <b:commandButton ajax="true" update="@form" action="#{personBean.deselectIdea()}" value="Deselect Idea" look="warning">
+                                </b:commandButton>
+                            </b:panelGrid>
+                        </h:form>
                     </c:if>
 
                     <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
@@ -61,7 +62,7 @@
 
                             <b:column>
                                 <f:facet name="header">Idea Title</f:facet>
-                                #{idea.title} 
+                                    #{idea.title} 
                             </b:column>
 
                             <b:column>
@@ -73,13 +74,11 @@
                                 <f:facet name="header">Tags</f:facet>
                                     #{idea.tags}
                             </b:column>
-                            
+
                             <b:column>
                                 <f:facet name="header">Assigned</f:facet>
                                 <h:outputText rendered="#{idea.assigned}" value="#{idea.student.email}"></h:outputText>
                             </b:column>
-                            
-
 
                             <b:column>
                                 <f:facet name="header">Edit</f:facet>
