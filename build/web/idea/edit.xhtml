@@ -12,7 +12,7 @@
         <f:viewParam name="id" value="#{ideaBean.selectedId}"/>
         <f:event type="preRenderView" listener="#{ideaBean.retrieve}"/>
     </f:metadata>
-    <ui:define name="title">Blah</ui:define>
+    <ui:define name="title">Edit Idea</ui:define>
     <ui:define name="content">
             <b:row>
             <b:column class="centered-text">
@@ -30,8 +30,7 @@
                         
                         <b:commandButton ajax="true" class="pull-right" look="primary" style="margin-left:1%;" value="Update" action="#{ideaBean.update()}"></b:commandButton>   
                         <b:commandButton ajax="true" class="pull-right" look="danger" value="Delete" action="#{ideaBean.delete()}"></b:commandButton>
-                      
-                    </h:form> 
+                       </h:form> 
                 </b:panel>
             </b:column>
         </b:row>

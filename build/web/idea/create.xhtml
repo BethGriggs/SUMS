@@ -7,7 +7,7 @@
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core">
-    <ui:define name="title">Edit Idea</ui:define>
+    <ui:define name="title">Create Idea</ui:define>
     <ui:define name="content">
         <b:row>
             <b:column class="centered-text">
@@ -22,7 +22,6 @@
                             <h:outputLabel value="Tags:"/>
                             <b:inputText  id="tags" value="#{ideaBean.tags}"></b:inputText>
                         </b:panelGrid>
-
                         <b:commandButton value="Create Idea" action="#{ideaBean.create()}" class="pull-right" look="primary" ajax="true"></b:commandButton>   
                     </h:form> 
                 </b:panel>

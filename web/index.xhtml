@@ -9,29 +9,28 @@
     <ui:define name="title">Index</ui:define>
     <ui:define name="content">
         <b:container>
-             <h:form>
-    		<b:dataTable value="#{ideaBean.allIdeas}" var="idea">
+            <h:form>
+                <b:dataTable value="#{ideaBean.allIdeas}" var="idea">
 
-    			<b:column>
-    				<f:facet name="header">Idea Title</f:facet>
-                                
-                    <h:link outcome="/idea/view">
-                        <f:param name="id" value="#{idea.id}"/>
-                        <h:outputText id="itemTitle" value="#{idea.title}"/>
-                    </h:link>
-    			</b:column>
-    			
-    			<b:column>
-    				<f:facet name="header">Description</f:facet>
-    				#{idea.description}
-    			</b:column> 
-                        <b:column>
-    				<f:facet name="header">Tags</f:facet>
-    				#{idea.tags}
-    			</b:column> 
-              
-    		</b:dataTable>
-                </h:form>
+                    <b:column>
+                        <f:facet name="header">Idea Title</f:facet>
+
+                        <h:link outcome="/idea/view">
+                            <f:param name="id" value="#{idea.id}"/>
+                            <h:outputText id="itemTitle" value="#{idea.title}"/>
+                        </h:link>
+                    </b:column>
+
+                    <b:column>
+                        <f:facet name="header">Description</f:facet>
+                            #{idea.description}
+                    </b:column> 
+                    <b:column>
+                        <f:facet name="header">Tags</f:facet>
+                            #{idea.tags}
+                    </b:column>    
+                </b:dataTable>
+            </h:form>
         </b:container>        
     </ui:define>
 </ui:composition>
