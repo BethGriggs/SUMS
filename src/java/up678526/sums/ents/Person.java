@@ -53,50 +53,98 @@ public class Person implements Serializable {
     @ManyToOne
     private Organisation organisation;
     
+    /**
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     *
+     * @return ideas
+     */
     public List<Idea> getIdeas() {
         return ideas;
     }
 
+    /**
+     *
+     * @param ideas
+     */
     public void setIdeas(List<Idea> ideas) {
         this.ideas = ideas;
     }
 
+    /**
+     *
+     * @return organisation
+     */
     public Organisation getOrganisation() {
         return organisation;
     }
 
+    /**
+     *
+     * @param organisation
+     */
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }

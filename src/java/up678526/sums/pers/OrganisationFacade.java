@@ -41,6 +41,9 @@ public class OrganisationFacade extends AbstractFacade<Organisation> {
         return em;
     }
 
+    /**
+     * constructor for organisation facade
+     */
     public OrganisationFacade() {
         super(Organisation.class);
     }

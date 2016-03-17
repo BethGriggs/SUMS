@@ -30,7 +30,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * Idea entity
  * @author up678526
  */
 @Entity
@@ -53,58 +53,114 @@ public class Idea implements Serializable {
     
     private Boolean assigned;
          
+    /**
+     *
+     * @return id
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     *
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return tags
+     */
     public String getTags() {
         return tags;
     }
 
+    /**
+     *
+     * @param tags
+     */
     public void setTags(String tags) {
         this.tags = tags;
     }
 
+    /**
+     *
+     * @return owner
+     */
     public Person getOwner() {
         return owner;
     }
 
+    /**
+     *
+     * @param owner
+     */
     public void setOwner(Person owner) {
         this.owner = owner;
     }
 
+    /**
+     *
+     * @return student
+     */
     public Person getStudent() {
         return student;
     }
 
+    /**
+     *
+     * @param student
+     */
     public void setStudent(Person student) {
         this.student = student;
     }
 
+    /**
+     *
+     * @return assigned
+     */
     public Boolean getAssigned() {
         return assigned;
     }
 
+    /**
+     *
+     * @param assigned
+     */
     public void setAssigned(Boolean assigned) {
         this.assigned = assigned;
     }

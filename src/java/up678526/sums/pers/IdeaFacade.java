@@ -38,15 +38,26 @@ public class IdeaFacade extends AbstractFacade<Idea> {
     @PersistenceContext(unitName = "SUMS")
     private EntityManager em;
 
+    /**
+     *
+     * @return entity manager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * constructor for idea facade
+     */
     public IdeaFacade() {
         super(Idea.class);
     }
     
+    /**
+     *
+     * @return list of all unassigned ideas
+     */
     public List<Idea> findAllUnassignedIdeas(){
               List <Idea> results = em
                 .createQuery("SELECT i FROM Idea i WHERE i.assigned = :assigned", Idea.class)
@@ -55,6 +66,11 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         return results;  
     }
     
+    /**
+     *
+     * @param person
+     * @return list of all ideas owned by the specified user
+     */
     public List<Idea> findIdeasByOwner(Person person){
         List <Idea> results = em
                 .createQuery("SELECT i FROM Idea i WHERE i.owner.id = :id", Idea.class)
@@ -63,6 +79,11 @@ public class IdeaFacade extends AbstractFacade<Idea> {
         return results;  
     }
     
+    /**
+     *
+     * @param student
+     * @return specified users assigned idea
+     */
     public List<Idea> findUserAssignedIdea(Person student){
         List <Idea> results = em
                 .createQuery("SELECT i FROM Idea i WHERE i.student.id = :id", Idea.class)

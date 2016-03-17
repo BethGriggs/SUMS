@@ -32,34 +32,65 @@ public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;
 
+    /**
+     * constructor for abstract facade
+     * @param entityClass
+     */
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     protected abstract EntityManager getEntityManager();
 
+    /**
+     * creates an entity
+     * @param entity
+     */
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
 
+    /**
+     * edits an entity
+     * @param entity
+     * @return object 
+     */
     public T edit(T entity) {
         return getEntityManager().merge(entity);
     }
 
+    /**
+     * remove entity 
+     * @param entity
+     */
     public void remove(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
 
+    /**
+     * find object by id
+     * @param id
+     * @return entity with specified id
+     */
     public T find(Object id) {
         return getEntityManager().find(entityClass, id);
     }
 
+    /**
+     * find all of specified entity
+     * @return list of entities
+     */
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return getEntityManager().createQuery(cq).getResultList();
     }
 
+    /**
+     *
+     * @param range
+     * @return entities within the range
+     */
     public List<T> findRange(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
@@ -69,6 +100,10 @@ public abstract class AbstractFacade<T> {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @return count value
+     */
     public int count() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
