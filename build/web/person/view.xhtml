@@ -18,13 +18,13 @@
                     <b:panelGrid columns="12">
                         <h:form>
                             <b:label text="Email:"/>
-                            <b:inputText readonly="true" value="#{personBean.currentUserEmail}"/>
+                            <b:inputText readonly="true" value="#{personBean.current.email}"/>
                             <b:label text="Type:"/>
-                            <b:inputText readonly="true" value="#{personBean.currentUserType}"/>
+                            <b:inputText readonly="true" value="#{personBean.current.type}"/>
                             <b:commandButton rendered="false" value=""></b:commandButton>
                         </h:form>
-                        <h:form rendered="#{personBean.currentUserType == 'STAFF'}">
-                            <b:label rendered="#{personBean.currentUserType == 'STAFF'}" text="Organisation:"/>
+                        <h:form rendered="#{personBean.current.type == 'STAFF'}">
+                            <b:label rendered="#{personBean.current.type == 'STAFF'}" text="Organisation:"/>
                             <b:inputText readonly="true" value="#{personBean.current.organisation.name}"/>
                             <b:selectOneMenu rendered="#{personBean.current.organisation == null}" value="#{personBean.organisation}">
                                 <f:selectItems value="#{organisationBean.organisations}" var="organisation" itemValue="#{organisation}" itemLabel="#{organisation.name}" />
@@ -34,7 +34,7 @@
                         </h:form>
                     </b:panelGrid>
 
-                    <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STUDENT')}">
+                    <c:if test="#{(personBean.current != null) and (personBean.current.type == 'STUDENT')}">
                         <h1>Assigned Idea</h1>
                         <h:outputText rendered="#{personBean.assignedIdea == null}" value="You have not selected an idea yet."></h:outputText>
                         <h:form rendered="#{personBean.assignedIdea != null}"> 
@@ -55,7 +55,7 @@
                         </h:form>
                     </c:if>
 
-                    <c:if test="#{(personBean.current != null) and (personBean.currentUserType == 'STAFF')}">
+                    <c:if test="#{(personBean.current != null) and (personBean.current.type == 'STAFF')}">
                         <h1 rendered="#{personBean.ownedIdeas != null}"> My Ideas</h1>
 
                         <b:dataTable value="#{personBean.ownedIdeas}" var="idea">

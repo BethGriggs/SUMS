@@ -124,7 +124,7 @@ public class IdeaService {
             idea.setStudent(person);
             idea.setAssigned(Boolean.TRUE);
             ideaFacade.edit(idea);
-        } else {
+        } else {    
             throw new AuthorisationException();
         }
 

@@ -23,8 +23,8 @@
                     <b:navLink rendered="#{personBean.current == null}" value="Login"  outcome="/login"></b:navLink>
                     <b:navLink rendered="#{personBean.current == null}" value="Register"  outcome="/person/create"></b:navLink>
                     <b:dropMenu rendered="#{personBean.current != null}" value="#{personBean.current.email}">
-                        <b:navLink rendered="#{personBean.currentUserType == 'STUDENT'}" value="Assigned Idea" href="#"></b:navLink>
-                        <b:navLink rendered="#{personBean.currentUserType == 'STAFF'}" value="Create Idea" outcome="/idea/create"></b:navLink>
+                        <b:navLink rendered="#{personBean.current.type == 'STUDENT'}" value="Assigned Idea" href="#"></b:navLink>
+                        <b:navLink rendered="#{personBean.current.type == 'STAFF'}" value="Create Idea" outcome="/idea/create"></b:navLink>
                         <b:navLink></b:navLink>
                         <b:navLink value="My Account" outcome="/person/view"></b:navLink>
                         <b:navLink></b:navLink>

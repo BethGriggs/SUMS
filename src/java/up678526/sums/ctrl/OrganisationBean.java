@@ -60,7 +60,7 @@ public class OrganisationBean implements Serializable {
     /**
      * Add a new organisation
      *
-     * @return 
+     * @return person/view page
      */
     public String create() {
  
@@ -72,19 +72,35 @@ public class OrganisationBean implements Serializable {
     } 
     
     /* getters and setters */ 
-    
+
+    /**
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     *
+     * @return departmentActivities
+     */
     public String getDepartmentActivities() {
         return departmentActivities;
     }
 
+    /**
+     *
+     * @param departmentActivities
+     */
     public void setDepartmentActivities(String departmentActivities) {
         this.departmentActivities = departmentActivities;
     } 

@@ -162,58 +162,91 @@ public class PersonBean implements Serializable {
     }
 
     /* getters and setters */
+
+    /**
+     *
+     * @return current user
+     */
     public Person getCurrent() {
         return current;
     }
 
+    /**
+     *
+     * @param current
+     */
     public void setCurrent(Person current) {
         this.current = current;
     }
 
+    /**
+     *
+     * @return email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     *
+     * @return password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     *
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
-    public String getCurrentUserEmail() {
-        return current.getEmail();
-    }
-
-    public String getCurrentUserType() {
-        if (current != null) {
-            return current.getType();
-        } else {
-            return null;
-        }
-    }
-
+    /**
+     *
+     * @return organistion
+     */
     public Organisation getOrganisation() {
         return organisation;
     }
 
+    /**
+     *
+     * @param organisation
+     */
     public void setOrganisation(Organisation organisation) {
         this.organisation = organisation;
     }
 
+    /**
+     *
+     * @return all ideas owned by current user
+     */
     public List<Idea> getOwnedIdeas() {
         return personService.getOwnedIdeas(current);
     }

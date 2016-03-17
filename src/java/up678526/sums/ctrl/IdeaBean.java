@@ -133,48 +133,85 @@ public class IdeaBean implements Serializable {
     }
 
     /* getters and setters */
+
+    /**
+     *
+     * @return managed property selectedId
+     */
     public String getSelectedId() {
         return selectedId;
     }
 
+    /**
+     *
+     * @param selectedId
+     */
     public void setSelectedId(String selectedId) {
         this.selectedId = selectedId;
     }
 
+    /**
+     *
+     * @return idea
+     */
     public Idea getIdea() {
         return idea;
     }
 
+    /**
+     *
+     * @param idea
+     */
     public void setIdea(Idea idea) {
         this.idea = idea;
     }
 
+    /**
+     *
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /**
+     *
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @return tags
+     */
     public String getTags() {
         return tags;
     }
 
+    /**
+     *
+     * @param tags
+     */
     public void setTags(String tags) {
         this.tags = tags;
-    }
-
-    public IdeaService getService() {
-        return this.ideaService;
     }
 
     /**
