@@ -37,15 +37,27 @@ public class PersonFacade extends AbstractFacade<Person> {
     @PersistenceContext(unitName = "SUMS")
     private EntityManager em;
 
+    /**
+     *
+     * @return entity manager
+     */
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
 
+    /**
+     * constructor for person facade
+     */
     public PersonFacade() {
         super(Person.class);
     }
     
+    /**
+     *
+     * @param email
+     * @return the users with the specified email (should only be one)
+     */
     public List findUserByEmail(String email) {
         List <Person> results = em
                 .createQuery("SELECT p FROM Person p WHERE p.email = :email", Person.class)
