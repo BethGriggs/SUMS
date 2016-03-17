@@ -23,6 +23,8 @@ package up678526.sums.ctrl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -30,11 +32,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import up678526.sums.bus.IdeaService;
+import up678526.sums.bus.exception.AuthorisationException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 
 /**
- * controller providing idea CRUD functionality 
+ * controller providing idea CRUD functionality
  *
  * @author up678526
  */
@@ -62,40 +65,53 @@ public class IdeaBean implements Serializable {
 
     /**
      * adds a new idea to the database
-     * 
+     *
      * @return index view
      */
     public String create() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Person currentUser = (Person) externalContext.getSessionMap().get("user");
 
+        // create the idea
         Idea newIdea = new Idea();
-
         newIdea.setTitle(this.title);
         newIdea.setDescription(this.description);
         newIdea.setTags(this.tags);
-        newIdea.setOwner(currentUser);
-        ideaService.addIdea(newIdea);
+        newIdea.setOwner(getCurrentUser());
+
+        try {
+            ideaService.addIdea(getCurrentUser(), newIdea);
+        } catch (AuthorisationException ex) {
+            Logger.getLogger(IdeaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return "/index?faces-redirect=true";
     }
 
     /**
      * updated the current idea
+     *
      * @return
      */
     public String update() {
-        ideaService.update(idea);
+        try {
+            ideaService.update(getCurrentUser(), idea);
+        } catch (AuthorisationException ex) {
+            Logger.getLogger(IdeaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return "/idea/view?faces-redirect=true";
     }
 
     /**
      * deletes the current idea
+     *
      * @return
      */
     public String delete() {
-        ideaService.remove(idea);
-        return "/index";
+        try {
+            ideaService.remove(getCurrentUser(),idea);
+        } catch (AuthorisationException ex) {
+            Logger.getLogger(IdeaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/index?faces-redirect=true";
     }
 
     /**
@@ -109,12 +125,13 @@ public class IdeaBean implements Serializable {
      * assigns the idea to the current (student) user
      */
     public void assignIdea() {
-        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        Person currentUser = (Person) externalContext.getSessionMap().get("user");
-
-        ideaService.assignIdeaToStudent(idea, currentUser);
+        try {
+            ideaService.assignIdeaToStudent(getCurrentUser(), idea);
+        } catch (AuthorisationException ex) {
+            Logger.getLogger(IdeaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     /* getters and setters */
     public String getSelectedId() {
         return selectedId;
@@ -167,5 +184,14 @@ public class IdeaBean implements Serializable {
     public List<Idea> getAllIdeas() {
         allIdeas = ideaService.getAllAvailableIdeas();
         return allIdeas;
+    }
+
+    /**
+     *
+     * @return current user object
+     */
+    public Person getCurrentUser() {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        return (Person) externalContext.getSessionMap().get("user");
     }
 }

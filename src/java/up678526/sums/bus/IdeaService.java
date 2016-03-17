@@ -22,14 +22,17 @@
 package up678526.sums.bus;
 
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import up678526.sums.bus.exception.AuthorisationException;
 import up678526.sums.ents.Idea;
 import up678526.sums.ents.Person;
 import up678526.sums.pers.IdeaFacade;
 
 /**
  * provides idea related functionality, including CRUD operations
+ *
  * @author up678526
  */
 @Stateless
@@ -54,17 +57,23 @@ public class IdeaService {
     /**
      * adds the specified idea to the database
      *
+     * @param person
      * @param idea
+     * @throws AuthorisationException
      */
-    public void addIdea(Idea idea) {
-        idea.setAssigned(Boolean.FALSE);
-        ideaFacade.create(idea);
+    public void addIdea(Person person, Idea idea) throws AuthorisationException {
+        if ("STAFF".equals(person.getType())) {
+            idea.setAssigned(Boolean.FALSE);
+            ideaFacade.create(idea);
+        } else {
+            throw new AuthorisationException();
+        }
     }
 
     /**
      * returns the list of all available ideas
      *
-     * @return list<
+     * @return list
      */
     public List<Idea> getAllAvailableIdeas() {
         return ideaFacade.findAllUnassignedIdeas();
@@ -73,32 +82,52 @@ public class IdeaService {
     /**
      * updates the specified idea
      *
+     * @param person
      * @param idea
      * @return updated idea object
+     * @throws AuthorisationException
      */
-    public Idea update(Idea idea) {
-        return ideaFacade.edit(idea);
+    public Idea update(Person person, Idea idea) throws AuthorisationException {
+        // only the owner can update the idea
+        if (Objects.equals(idea.getOwner().getId(), person.getId())) {
+            return ideaFacade.edit(idea);
+        } else {
+            throw new AuthorisationException();
+        }
     }
 
     /**
      * removes the specified idea
      *
+     * @param person
      * @param idea
+     * @throws AuthorisationException
      */
-    public void remove(Idea idea) {
-        ideaFacade.remove(idea);
+    public void remove(Person person, Idea idea) throws AuthorisationException {
+        // only the owner can delete the idea
+        if (Objects.equals(idea.getOwner().getId(), person.getId())) {
+            ideaFacade.remove(idea);
+        } else {
+            throw new AuthorisationException();
+        }
     }
 
     /**
      * assigns an idea to a student
      *
+     * @param person
      * @param idea
-     * @param student
+     * @throws AuthorisationException
      */
-    public void assignIdeaToStudent(Idea idea, Person student) {
-        idea.setStudent(student);
-        idea.setAssigned(Boolean.TRUE);
-        ideaFacade.edit(idea);
+    public void assignIdeaToStudent(Person person, Idea idea) throws AuthorisationException {
+        if (person.getType().equals("STUDENT")) {
+            idea.setStudent(person);
+            idea.setAssigned(Boolean.TRUE);
+            ideaFacade.edit(idea);
+        } else {
+            throw new AuthorisationException();
+        }
+
     }
 
     /**
