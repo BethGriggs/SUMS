@@ -31,7 +31,7 @@
                             <b:label rendered="#{ideaBean.idea.owner.organisation != null}" text="Department Activities:"/>
                             <b:inputText readonly="true" rendered="#{ideaBean.idea.owner.organisation != null}" value="#{ideaBean.idea.owner.organisation.departmentActivities}"/>
                         </b:panelGrid>
-                        <b:commandButton ajax="true" action="#{ideaBean.assignIdea()}" rendered="#{personBean.currentUserType == 'STUDENT' and !ideaBean.idea.assigned and personBean.assignedIdea == null}" value="Select Idea" look="success" class="pull-right">
+                        <b:commandButton ajax="true" action="#{ideaBean.assignIdea()}" rendered="#{personBean.current.type == 'STUDENT' and !ideaBean.idea.assigned and personBean.assignedIdea == null}" value="Select Idea" look="success" class="pull-right">
                         </b:commandButton>
                     </h:form>
                 </b:panel>

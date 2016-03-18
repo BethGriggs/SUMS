@@ -5,22 +5,24 @@
         <group>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/pers/OrganisationFacade.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ents/Idea.java</file>
-            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ents/Person.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ctrl/OrganisationBean.java</file>
-            <file>file:/Users/beth/Documents/SUMS/src/conf/persistence.xml</file>
+            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ents/Person.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/pers/PersonFacade.java</file>
+            <file>file:/Users/beth/Documents/SUMS/src/conf/persistence.xml</file>
+            <file>file:/Users/beth/Documents/SUMS/web/index.xhtml</file>
             <file>file:/Users/beth/Documents/SUMS/web/start.xhtml</file>
-            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/pers/IdeaFacade.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/OrganisationService.java</file>
+            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/pers/IdeaFacade.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/IdeaService.java</file>
-            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/BusinessException.java</file>
-            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/AuthenticationException.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/PersonService.java</file>
+            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/AuthenticationException.java</file>
+            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/BusinessException.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ctrl/PersonBean.java</file>
+            <file>file:/Users/beth/Documents/SUMS/web/WEB-INF/glassfish-resources.xml</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/pers/AbstractFacade.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ents/Organisation.java</file>
-            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/AuthorisationException.java</file>
             <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/ctrl/IdeaBean.java</file>
+            <file>file:/Users/beth/Documents/SUMS/src/java/up678526/sums/bus/exception/AuthorisationException.java</file>
         </group>
     </open-files>
 </project-private>
